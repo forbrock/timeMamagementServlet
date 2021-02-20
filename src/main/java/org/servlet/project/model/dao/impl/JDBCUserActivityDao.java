@@ -18,6 +18,7 @@ public class JDBCUserActivityDao implements UserActivityDao {
     private static final Logger log = LogManager.getLogger(JDBCUserActivityDao.class);
 
     private static final String FIND_BY_USER_ID_QUERY = "SELECT " +
+            " users_activities.id AS id," +
             " u.id AS user_id," +
             " u.email AS user_email," +
             " a.id AS activity_id," +

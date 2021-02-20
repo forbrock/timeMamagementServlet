@@ -1,6 +1,6 @@
 package org.servlet.project.controller.command;
 
-import org.servlet.project.exception.UserNotFoundException;
+import org.servlet.project.exceptions.UserNotFoundException;
 import org.servlet.project.model.entity.User;
 import org.servlet.project.model.service.SecurityService;
 import org.servlet.project.model.service.UserActivityService;

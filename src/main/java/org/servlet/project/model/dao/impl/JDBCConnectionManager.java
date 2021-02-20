@@ -2,7 +2,6 @@ package org.servlet.project.model.dao.impl;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import javax.sql.DataSource;
 import java.util.ResourceBundle;
 
 public class JDBCConnectionManager {

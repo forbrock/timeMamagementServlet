@@ -5,6 +5,8 @@ import org.servlet.project.model.entity.ActivityState;
 import java.util.Objects;
 
 public class UserActivityDto {
+    private long id;
+
     private long userId;
     private String email;
 
@@ -17,6 +19,10 @@ public class UserActivityDto {
     private ActivityState state;
 
     public UserActivityDto() {}
+
+    public long getId() {
+        return id;
+    }
 
     public ActivityState getState() {
         return state;
@@ -51,7 +57,8 @@ public class UserActivityDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserActivityDto that = (UserActivityDto) o;
-        return userId == that.userId &&
+        return id == that.id &&
+                userId == that.userId &&
                 activityId == that.activityId &&
                 categoryId == that.categoryId &&
                 email.equals(that.email) &&
@@ -62,10 +69,11 @@ public class UserActivityDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, email, activityId, activityName, categoryId, categoryName, state);
+        return Objects.hash(id, userId, email, activityId, activityName, categoryId, categoryName, state);
     }
 
     private UserActivityDto(UserActivityDtoBuilder builder) {
+        this.id = builder.id;
         this.userId = builder.userId;
         this.email = builder.email;
         this.activityId = builder.activityId;
@@ -80,6 +88,8 @@ public class UserActivityDto {
     }
 
     public static class UserActivityDtoBuilder {
+        private long id;
+
         private long userId;
         private String email;
 
@@ -89,6 +99,11 @@ public class UserActivityDto {
         private long categoryId;
         private String categoryName;
         private ActivityState state;
+
+        public UserActivityDtoBuilder id(long id) {
+            this.id = id;
+            return this;
+        }
 
         public UserActivityDtoBuilder userId(long id) {
             this.userId = id;

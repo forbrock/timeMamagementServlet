@@ -55,15 +55,14 @@
                 <tbody>
                 <div>
                     <c:forEach var="ua" items="${requestScope.userActivities}">
-                        <c:if test="${ua.state.name == 'ACCEPTED'}">
+                        <c:if test="${ua.state.name() == 'ACCEPTED'}">
                             <tr>
-                                <td><span>${ua.activity.category.name}</span></td>
-                                <td><span>${ua.activity.name}</span></td>
-                                <td><span>${ua.state}</span></td>
+                                <td><span>${ua.categoryName}</span></td>
+                                <td><span>${ua.activityName}</span></td>
+                                <td><span>${ua.state.name()}</span></td>
                                 <td>
-                                    <form method="post" action="${contextPath}/time/{id}/add(id=${ua.getId()})}">
-                                        <fieldset titile=""
-                                                  title="<fmt:message key="valid.index.tab.current.table.content.time.tooltip">constraints</fmt:message>">
+                                    <form method="post" action="${contextPath}/time/${ua.id}/add}">
+                                        <fieldset title="<fmt:message key="valid.index.tab.current.table.content.time.tooltip">constraints</fmt:message>">
                                             <input type="number" name="time" min="0.5" max="12" step="0.5" required>
                                             <input type="submit" value="<fmt:message key="index.tab.current.table.content.add.time">add time</fmt:message>">
                                         </fieldset>
@@ -72,7 +71,7 @@
                                 <td><span>${ua.duration}</span></td>
                                 <td>
                                     <a type="button" class="btn btn-outline-success btn-sm px-2"
-                                       href="${contextPath}/complete/{id}(id=${ua.id})">
+                                       href="${contextPath}/complete/${ua.id}">
                                         <fmt:message key="index.tab.current.table.content.complete.task">complete task</fmt:message>
                                     </a>
                                 </td>
@@ -120,12 +119,12 @@
                 <tbody>
                     <div>
                         <c:forEach var="ua" items="${requestScope.userActivities}">
-                            <c:if test="${ua.getState().name() == 'COMPLETED'}">
+                            <c:if test="${ua.state.name() == 'COMPLETED'}">
                                 <tr>
-                                    <td><span>${ua.getActivity().getCategory().getName()}</span></td>
-                                    <td><span>${ua.getActivity().getName()}</span></td>
-                                    <td><span>${ua.getState()}</span></td>
-                                    <td><span>${ua.getDuration()}</span></td>
+                                    <td><span>${ua.categoryName}</span></td>
+                                    <td><span>${ua.activityName}</span></td>
+                                    <td><span>${ua.state.name()}</span></td>
+                                    <td><span>${ua.duration}</span></td>
                                 </tr>
                             </c:if>
                         </c:forEach>

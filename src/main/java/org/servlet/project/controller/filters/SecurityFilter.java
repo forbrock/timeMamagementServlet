@@ -1,4 +1,4 @@
-package org.servlet.project.filter;
+package org.servlet.project.controller.filters;
 
 import org.servlet.project.model.entity.User;
 import org.servlet.project.model.service.SecurityService;
@@ -7,7 +7,6 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;

@@ -1,12 +1,11 @@
 package org.servlet.project.model.dao.mapper;
 
-import org.servlet.project.exception.UserNotFoundException;
+import org.servlet.project.exceptions.UserNotFoundException;
 import org.servlet.project.model.entity.Role;
 import org.servlet.project.model.entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 public class UserMapper implements ObjectMapper<User> {
 

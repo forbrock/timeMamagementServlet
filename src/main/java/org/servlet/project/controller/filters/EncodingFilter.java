@@ -1,4 +1,4 @@
-package org.servlet.project.filter;
+package org.servlet.project.controller.filters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

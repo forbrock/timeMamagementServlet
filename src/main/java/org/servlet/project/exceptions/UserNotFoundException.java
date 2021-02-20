@@ -1,4 +1,4 @@
-package org.servlet.project.exception;
+package org.servlet.project.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException() {
