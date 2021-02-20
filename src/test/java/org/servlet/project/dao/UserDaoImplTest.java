@@ -2,8 +2,10 @@ package org.servlet.project.dao;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.servlet.project.model.dao.impl.JDBCDaoFactory;
-import org.servlet.project.model.dao.impl.JDBCUserDao;
+import org.servlet.project.model.dao.UserDao;
+import org.servlet.project.model.dao.impl.ConnectionManager;
+import org.servlet.project.model.dao.impl.DaoFactory;
+import org.servlet.project.model.dao.impl.UserDaoImpl;
 import org.servlet.project.model.entity.Role;
 import org.servlet.project.model.entity.User;
 
@@ -12,19 +14,19 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class JDBCUserDaoTest {
-    private static JDBCDaoFactory jdbcDaoFactory;
-    private static JDBCUserDao userDao;
+public class UserDaoImplTest {
+    private static DaoFactory daoFactory;
+    private static UserDao userDao;
 
     @BeforeAll
     public static void init() {
-        jdbcDaoFactory = new JDBCDaoFactory();
-        userDao = jdbcDaoFactory.createUserDao();
+        daoFactory = new DaoFactory();
+        userDao = daoFactory.createUserDao();
     }
 
     @Test
     public void connection_test() {
-        Connection connection = jdbcDaoFactory.getConnection();
+        Connection connection = ConnectionManager.getConnection();
         try {
             assertTrue(connection.isValid(3));
         } catch (SQLException e) {

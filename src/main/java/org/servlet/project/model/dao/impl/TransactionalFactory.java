@@ -2,23 +2,9 @@ package org.servlet.project.model.dao.impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Objects;
 
-public class TransactionalFactory extends JDBCDaoFactory {
-    private Connection connection;
-
-    @Override
-    public Connection getConnection() {
-        if(Objects.isNull(connection)) {
-            try {
-                connection = JDBCConnectionManager.getDataSource().getConnection();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        }
-        return connection;
-    }
+public class TransactionalFactory extends DaoFactory {
+    private final Connection connection = ConnectionManager.getConnection();
 
     public void begin() throws SQLException {
         connection.setAutoCommit(false);

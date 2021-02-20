@@ -1,5 +1,8 @@
 package org.servlet.project.controller.command;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.servlet.project.MainServlet;
 import org.servlet.project.model.entity.User;
 import org.servlet.project.model.service.SecurityService;
 import org.servlet.project.model.service.UserService;
@@ -8,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 import java.util.Optional;
 
+import static org.servlet.project.util.ViewResolver.resolve;
+
 public class LoginCommand implements Command {
+    private static final Logger log = LogManager.getLogger(LoginCommand.class);
+
     private final UserService userService;
     private final SecurityService securityService;
 
@@ -19,6 +26,10 @@ public class LoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
+        if (request.getMethod().equals("GET")) {
+            log.info("GET login page");
+            return resolve("login");
+        }
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String goToLogin = "/WEB-INF/view/login.jsp";
@@ -51,12 +62,6 @@ public class LoginCommand implements Command {
 //        request.getSession().invalidate();
         securityService.storeLoggedUser(request.getSession(), user.get());
 
-        // TODO: implement getting uri
-        String uri = securityService.getRedirectUri(request);
-
-        if (Objects.nonNull(uri)) {
-            return "redirect:" + uri;
-        }
-        return "redirect:index";
+        return "redirect:/index";
     }
 }

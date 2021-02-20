@@ -32,14 +32,14 @@ public class SecurityFilter implements Filter {
 
 //        String uri = request.getRequestURI()
 //                .replaceFirst(request.getContextPath() + ".*/", "");
-        String uri = request.getRequestURI() + request.getContextPath();
-        User loggedUser = securityService.getLoggedUser(request.getSession());
-
-        if (Objects.isNull(loggedUser) && unauthorizedPaths.contains(uri)) {
-//            response.sendRedirect(request.getContextPath() + request.getServletPath() + "login");
-            response.sendRedirect(uri);
-            return;
-        }
+//        String uri = request.getRequestURI() + request.getContextPath();
+//        User loggedUser = securityService.getLoggedUser(request.getSession());
+//
+//        if (Objects.isNull(loggedUser) && unauthorizedPaths.contains(uri)) {
+////            response.sendRedirect(request.getContextPath() + request.getServletPath() + "login");
+//            response.sendRedirect(uri);
+//            return;
+//        }
         chain.doFilter(request, response);
     }
 

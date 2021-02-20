@@ -17,9 +17,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import static org.servlet.project.util.ViewResolver.resolve;
+
 public class MainServlet extends HttpServlet {
     private static final Logger log = LogManager.getLogger(MainServlet.class);
-    private Map<String, Command> commands = new HashMap<>();
+    private final Map<String, Command> commands = new HashMap<>();
 
     private final UserService userService = new UserService();
     private final UserActivityService userActivityService = new UserActivityService();
@@ -27,24 +29,31 @@ public class MainServlet extends HttpServlet {
 
     public void init(ServletConfig servletConfig) {
         servletConfig.getServletContext().setAttribute("loggedUsers", new HashSet<String>());
+        IndexCommand indexCommand = new IndexCommand(userService, userActivityService, securityService);
 
-        commands.put("/logout", new LogoutCommand());
+        commands.put("logout", new LogoutCommand());
         commands.put("login", new LoginCommand(userService, securityService));
-        commands.put("/registration", new RegistrationCommand());
-        commands.put("index", new IndexCommand(userService, userActivityService, securityService));
+        commands.put("registration", new RegistrationCommand());
+        commands.put("index", indexCommand);
+        commands.put("time", new TimeCommand());
+        commands.put("/", indexCommand);
     }
 
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response) throws ServletException, IOException {
+        log.info("Method " + request.getMethod());
 
-        String path = request.getRequestURI()
-                .replaceFirst(request.getContextPath() + ".*/", "");
-        Command command = commands.getOrDefault(path, (def) -> "/WEB-INF/view/index.jsp");
+        String contextPath = request.getContextPath();
+        String path = request.getRequestURI();
+        log.info("Path " + path);
+        path = path.replace(contextPath, "").replaceFirst("/", "");
+        Command command = commands.getOrDefault(path, (def) -> resolve("login"));
         String page = command.execute(request);
 
         if (page.contains("redirect:")) {
-            response.sendRedirect(request.getContextPath() +
-                    request.getServletPath() + page.replace("redirect:", ""));
+            String redirectStr = contextPath + page.replace("redirect:", "");
+            log.info(redirectStr);
+            response.sendRedirect(redirectStr);
         } else {
             request.getRequestDispatcher(page).forward(request, response);
         }

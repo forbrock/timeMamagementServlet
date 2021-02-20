@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class JDBCUserActivityDao implements UserActivityDao {
-    private static final Logger log = LogManager.getLogger(JDBCUserActivityDao.class);
+public class UserActivityDaoImpl implements UserActivityDao {
+    private static final Logger log = LogManager.getLogger(UserActivityDaoImpl.class);
 
     private static final String FIND_BY_USER_ID_QUERY = "SELECT" +
             " users_activities.id AS id," +
@@ -38,7 +38,7 @@ public class JDBCUserActivityDao implements UserActivityDao {
     private Connection connection;
     private UserActivityDtoMapper uaMapper = new UserActivityDtoMapper();
 
-    public JDBCUserActivityDao(Connection connection) {
+    public UserActivityDaoImpl(Connection connection) {
         this.connection = connection;
     }
 

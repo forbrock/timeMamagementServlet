@@ -13,8 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class JDBCUserDao implements UserDao {
-    private static final Logger log = LogManager.getLogger(JDBCUserDao.class);
+public class UserDaoImpl implements UserDao {
+    private static final Logger log = LogManager.getLogger(UserDaoImpl.class);
 
     private static final String FIND_BY_ID_QUERY = "select * from users where users.id = ?";
     private static final String FIND_BY_USERNAME_QUERY = "select * from users where users.email = ?";
@@ -22,7 +22,7 @@ public class JDBCUserDao implements UserDao {
     private Connection connection;
     private UserMapper userMapper = new UserMapper();
 
-    public JDBCUserDao(Connection connection) {
+    public UserDaoImpl(Connection connection) {
         this.connection = connection;
     }
 

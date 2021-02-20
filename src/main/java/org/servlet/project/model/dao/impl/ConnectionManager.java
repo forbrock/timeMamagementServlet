@@ -1,10 +1,16 @@
 package org.servlet.project.model.dao.impl;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class JDBCConnectionManager {
+public class ConnectionManager {
+    private static final Logger log = LogManager.getLogger(ConnectionManager.class);
+
     private static BasicDataSource ds;
     private static final String URL;
     private static final String USER;
@@ -21,9 +27,9 @@ public class JDBCConnectionManager {
         PASSWORD = resourceBundle.getString("database.password");
     }
 
-    public static BasicDataSource getDataSource() {
+    private static BasicDataSource getDataSource() {
         if (ds == null) {
-            synchronized (JDBCConnectionManager.class) {
+            synchronized (ConnectionManager.class) {
                 if (ds == null) {
                     ds = new BasicDataSource();
                     ds.setMaxIdle(DEFAULT_MAX_IDLE);
@@ -36,6 +42,15 @@ public class JDBCConnectionManager {
             }
         }
         return ds;
+    }
+
+    public static Connection getConnection(){
+        try {
+            return getDataSource().getConnection();
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
+            throw new RuntimeException(e);
+        }
     }
 
     private static void registerDriver() {
