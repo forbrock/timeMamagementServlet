@@ -1,5 +1,7 @@
 package org.servlet.project.model.dto;
 
+import org.servlet.project.model.entity.ActivityState;
+
 import java.util.Objects;
 
 public class UserActivityDto {
@@ -12,7 +14,13 @@ public class UserActivityDto {
     private long categoryId;
     private String categoryName;
 
+    private ActivityState state;
+
     public UserActivityDto() {}
+
+    public ActivityState getState() {
+        return state;
+    }
 
     public long getUserId() {
         return userId;
@@ -48,12 +56,13 @@ public class UserActivityDto {
                 categoryId == that.categoryId &&
                 email.equals(that.email) &&
                 activityName.equals(that.activityName) &&
-                categoryName.equals(that.categoryName);
+                categoryName.equals(that.categoryName) &&
+                state == that.state;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, email, activityId, activityName, categoryId, categoryName);
+        return Objects.hash(userId, email, activityId, activityName, categoryId, categoryName, state);
     }
 
     private UserActivityDto(UserActivityDtoBuilder builder) {
@@ -63,6 +72,7 @@ public class UserActivityDto {
         this.activityName = builder.activityName;
         this.categoryId = builder.categoryId;
         this.categoryName = builder.categoryName;
+        this.state = builder.state;
     }
 
     public static UserActivityDtoBuilder builder() {
@@ -78,6 +88,7 @@ public class UserActivityDto {
 
         private long categoryId;
         private String categoryName;
+        private ActivityState state;
 
         public UserActivityDtoBuilder userId(long id) {
             this.userId = id;
@@ -106,6 +117,11 @@ public class UserActivityDto {
 
         public UserActivityDtoBuilder categoryName(String name) {
             this.categoryName = name;
+            return this;
+        }
+
+        public UserActivityDtoBuilder state(ActivityState state) {
+            this.state = state;
             return this;
         }
 

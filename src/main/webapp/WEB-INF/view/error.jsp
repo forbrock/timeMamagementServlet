@@ -15,10 +15,9 @@
 <div class="container" style="margin-top: 50px;">
     <div class="error-body">
         <h3><mft:message key="error.page.common.message">something went wrong!</mft:message></h3>
-<%--        <h1 th:text="|${httpStatus.reasonPhrase}|">404</h1>--%>
-        <h1><c:out value="${httpStatus.reasonPhrase}">404</c:out></h1>
-<%--        <p style="font-size: 22px;" th:utext="${exception}">Error</p>--%>
+        <h1><c:out value="${httpStatus}">404</c:out></h1>
         <p style="font-size: 22px;"><c:out value="${exception}">error</c:out></p>
+            <%= exception %>
         <p><c:out value="${requestScope['javax.servlet.error.request_uri']}">url</c:out></p>
         <a href="${pageContext}/"><mft:message key="error.page.back.home">back to Home Page</mft:message></a>
     </div>

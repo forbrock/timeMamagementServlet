@@ -6,8 +6,7 @@ import org.servlet.project.model.entity.Role;
 import org.servlet.project.model.entity.User;
 import org.servlet.project.model.service.SecurityService;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -17,27 +16,34 @@ import java.io.IOException;
 import java.util.Objects;
 
 @WebFilter("/admin/*")
-public class AdminAccessFilter extends HttpFilter {
+public class AdminAccessFilter implements Filter {
     private static final Logger log = LogManager.getLogger(AdminAccessFilter.class);
     private SecurityService securityService;
 
-    public AdminAccessFilter(SecurityService securityService) {
-        this.securityService = securityService;
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        securityService = new SecurityService();
     }
 
     @Override
-    protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException {
-        HttpSession session = req.getSession();
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+        HttpSession session = request.getSession();
         User user = securityService.getLoggedUser(session);
 
         try {
             if (Objects.isNull(user) || (user.getRole() != Role.ADMIN)) {
-                res.sendRedirect(req.getContextPath() + "/WEB-INF/view/error.jsp");
+                response.sendRedirect(request.getContextPath() + "/WEB-INF/view/errors/403.jsp");
                 return;
             }
             chain.doFilter(req, res);
         } catch (IOException | ServletException e) {
             log.error("Authentication error", e);
         }
+    }
+
+    @Override
+    public void destroy() {
     }
 }

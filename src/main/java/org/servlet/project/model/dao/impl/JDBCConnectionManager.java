@@ -15,14 +15,14 @@ public class JDBCConnectionManager {
     private static final int DEFAULT_MAX_OPEN_PREPARED_STATEMENTS = 20;
 
     static {
-//        registerDriver();
+        registerDriver();
         ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
         URL = resourceBundle.getString("database.url");
         USER = resourceBundle.getString("database.user");
         PASSWORD = resourceBundle.getString("database.password");
     }
 
-    public static DataSource getDataSource() {
+    public static BasicDataSource getDataSource() {
         if (ds == null) {
             synchronized (JDBCConnectionManager.class) {
                 if (ds == null) {

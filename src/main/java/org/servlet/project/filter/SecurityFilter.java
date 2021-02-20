@@ -8,13 +8,15 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebFilter("/*")
 public class SecurityFilter implements Filter {
     private SecurityService securityService;
 
-    public SecurityFilter(SecurityService securityService) {
-        this.securityService = securityService;
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        securityService = new SecurityService();
     }
 
     @Override
@@ -24,11 +26,17 @@ public class SecurityFilter implements Filter {
 
         String servletPath = request.getServletPath();
         User loggedUser = securityService.getLoggedUser(request.getSession());
-        chain.doFilter(request, response);
-    }
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+        if (Objects.isNull(loggedUser)) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        if (servletPath.equals("/login")) {
+            chain.doFilter(request, response);
+            return;
+        }
+        chain.doFilter(request, response);
     }
 
     @Override

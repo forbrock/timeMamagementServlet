@@ -2,6 +2,7 @@ package org.servlet.project.model.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.servlet.project.exception.UserNotFoundException;
 import org.servlet.project.model.dao.UserDao;
 import org.servlet.project.model.dao.mapper.UserMapper;
 import org.servlet.project.model.entity.Role;

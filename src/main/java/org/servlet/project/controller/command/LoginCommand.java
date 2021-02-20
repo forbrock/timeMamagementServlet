@@ -23,7 +23,8 @@ public class LoginCommand implements Command {
         String password = request.getParameter("password");
 
         // TODO: add fields validation
-        if(Objects.isNull(email) || Objects.isNull(password)){
+        if(Objects.isNull(email) || Objects.isNull(password) ||
+                email.isEmpty() || password.isBlank()) {
             return "/WEB-INF/view/login.jsp";
         }
 
@@ -46,7 +47,7 @@ public class LoginCommand implements Command {
             return "/WEB-INF/view/login.jsp";
         }
 
-        request.getSession().invalidate();
+//        request.getSession().invalidate();
         securityService.storeLoggedUser(request.getSession(), user.get());
 
         // TODO: implement getting uri
