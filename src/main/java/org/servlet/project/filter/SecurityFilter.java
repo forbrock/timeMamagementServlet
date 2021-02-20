@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebFilter("/*")
+@WebFilter("/app/*")
 public class SecurityFilter implements Filter {
     private SecurityService securityService;
 
@@ -24,18 +24,20 @@ public class SecurityFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        String servletPath = request.getServletPath();
+        String uri = request.getRequestURI().replaceFirst(request.getContextPath() + "/app", "");
         User loggedUser = securityService.getLoggedUser(request.getSession());
 
         if (Objects.isNull(loggedUser)) {
-            response.sendRedirect( "/app/login");
+            response.sendRedirect(request.getContextPath() + request.getServletPath() + "/login");
             return;
         }
 
+/*
         if (servletPath.equals("/login")) {
             chain.doFilter(request, response);
             return;
         }
+*/
         chain.doFilter(request, response);
     }
 
