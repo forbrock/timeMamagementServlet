@@ -21,30 +21,31 @@ public class LoginCommand implements Command {
     public String execute(HttpServletRequest request) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String goToLogin = "/WEB-INF/view/login.jsp";
 
         // TODO: add fields validation
         if(Objects.isNull(email) || Objects.isNull(password) ||
                 email.isEmpty() || password.isBlank()) {
-            return "/WEB-INF/view/login.jsp";
+            return goToLogin;
         }
 
         // TODO: check validation message
         Optional<User> user = userService.findByEmail(email);
         if (user.isEmpty()) {
             request.setAttribute("loginFailureMessage", "valid.login.login.failure");
-            return "/WEB-INF/view/login.jsp";
+            return goToLogin;
         }
 
         // TODO: check validation message
         if (securityService.isLogged(request, email)) {
             request.setAttribute("userAlreadyLoggedMessage", "valid.login.already.logged.in");
-            return "/WEB-INF/view/login.jsp";
+            return goToLogin;
         }
 
         // TODO: check validation message
         if (!securityService.passwordIsValid(password, user.get())) {
             request.setAttribute("passFailureMessage", "valid.login.password.failure");
-            return "/WEB-INF/view/login.jsp";
+            return goToLogin;
         }
 
 //        request.getSession().invalidate();
@@ -56,6 +57,6 @@ public class LoginCommand implements Command {
         if (Objects.nonNull(uri)) {
             return "redirect:" + uri;
         }
-        return "redirect:/index";
+        return "redirect:index";
     }
 }

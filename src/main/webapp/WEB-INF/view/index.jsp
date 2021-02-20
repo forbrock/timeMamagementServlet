@@ -136,7 +136,7 @@
     <c:if test="${requestScope.request_success_message != null}">
         <div class="alert alert-success alert" role="alert">
             <fmt:message key="valid.index.requested.activity.message.success"/>
-            <a href="${contextPath}/app/index">
+            <a href="${contextPath}/index">
                 <fmt:message key="valid.index.requested.activity.message.success.return">return</fmt:message>
             </a>
         </div>
@@ -144,7 +144,7 @@
     <c:if test="${requestScope.request_success_message != null}">
         <div class="alert alert-success alert" role="alert">
             <fmt:message key="valid.index.requested.activity.message.failure"/>
-            <a href="${contextPath}/app/index">
+            <a href="${contextPath}/index">
                 <fmt:message key="valid.index.requested.activity.message.failure.return">return</fmt:message>
             </a>
         </div>

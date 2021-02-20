@@ -2,6 +2,7 @@ package org.servlet.project.model.dto;
 
 import org.servlet.project.model.entity.ActivityState;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class UserActivityDto {
@@ -17,11 +18,21 @@ public class UserActivityDto {
     private String categoryName;
 
     private ActivityState state;
+    private double duration;
+    private LocalDateTime startDate;
 
     public UserActivityDto() {}
 
     public long getId() {
         return id;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
     public ActivityState getState() {
@@ -81,6 +92,8 @@ public class UserActivityDto {
         this.categoryId = builder.categoryId;
         this.categoryName = builder.categoryName;
         this.state = builder.state;
+        this.duration = builder.duration;
+        this.startDate = builder.startDate;
     }
 
     public static UserActivityDtoBuilder builder() {
@@ -98,7 +111,10 @@ public class UserActivityDto {
 
         private long categoryId;
         private String categoryName;
+
         private ActivityState state;
+        private double duration;
+        private LocalDateTime startDate;
 
         public UserActivityDtoBuilder id(long id) {
             this.id = id;
@@ -137,6 +153,16 @@ public class UserActivityDto {
 
         public UserActivityDtoBuilder state(ActivityState state) {
             this.state = state;
+            return this;
+        }
+
+        public UserActivityDtoBuilder duration(double duration) {
+            this.duration = duration;
+            return this;
+        }
+
+        public UserActivityDtoBuilder startDate(LocalDateTime startDate) {
+            this.startDate = startDate;
             return this;
         }
 

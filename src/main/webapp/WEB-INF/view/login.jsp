@@ -23,7 +23,7 @@
 <div class="container">
     <div><jsp:include page="fragments/lang.jsp"/></div>
 
-    <form class="form-signin" method="post" action="${contextPath}/app/login">
+    <form class="form-signin" method="post" action="${contextPath}/login">
         <h2 class="form-signin-heading"><fmt:message key="login.header">sign in</fmt:message> </h2>
         <c:if test="${requestScope.logout != null}">
             <div class="alert alert-success" role="alert"><fmt:message key="valid.login.logged.out.success"/></div>
@@ -45,7 +45,7 @@
             <fmt:message key="login.login">log in</fmt:message>
         </button>
         <div class="my-sm-3 m-3 text-right">
-            <a href="${contextPath}/app/registration">
+            <a href="${contextPath}/registration">
                 <fmt:message key="login.sign.up">sign up</fmt:message>
             </a>
         </div>

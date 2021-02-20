@@ -29,16 +29,16 @@ public class MainServlet extends HttpServlet {
         servletConfig.getServletContext().setAttribute("loggedUsers", new HashSet<String>());
 
         commands.put("/logout", new LogoutCommand());
-        commands.put("/login", new LoginCommand(userService, securityService));
+        commands.put("login", new LoginCommand(userService, securityService));
         commands.put("/registration", new RegistrationCommand());
-        commands.put("/index", new IndexCommand(userService, userActivityService, securityService));
+        commands.put("index", new IndexCommand(userService, userActivityService, securityService));
     }
 
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response) throws ServletException, IOException {
 
         String path = request.getRequestURI()
-                .replaceFirst(request.getContextPath() + "/app", "");
+                .replaceFirst(request.getContextPath() + ".*/", "");
         Command command = commands.getOrDefault(path, (def) -> "/WEB-INF/view/index.jsp");
         String page = command.execute(request);
 
