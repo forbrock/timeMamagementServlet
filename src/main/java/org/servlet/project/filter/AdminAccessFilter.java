@@ -34,7 +34,7 @@ public class AdminAccessFilter implements Filter {
 
         try {
             if (Objects.isNull(user) || (user.getRole() != Role.ADMIN)) {
-                response.sendRedirect(request.getContextPath() + "/WEB-INF/view/errors/403.jsp");
+                response.sendRedirect("/WEB-INF/view/errors/403.jsp");
                 return;
             }
             chain.doFilter(req, res);

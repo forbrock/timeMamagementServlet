@@ -28,7 +28,7 @@ public class SecurityFilter implements Filter {
         User loggedUser = securityService.getLoggedUser(request.getSession());
 
         if (Objects.isNull(loggedUser)) {
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect( "/app/login");
             return;
         }
 
