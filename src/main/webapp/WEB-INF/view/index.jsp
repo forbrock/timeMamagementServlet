@@ -69,7 +69,8 @@
                                         </fieldset>
                                     </form>
                                 </td>
-                                <td><span>${ua.duration}</span></td>
+<%--                                <td><span>${ua.duration}</span></td>--%>
+                                <td><span>total time</span></td>
                                 <td>
                                     <a type="button" class="btn btn-outline-success btn-sm px-2"
                                        href="${contextPath}/complete/${ua.id}">

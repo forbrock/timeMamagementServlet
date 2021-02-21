@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDao {
     private static final Logger log = LogManager.getLogger(UserDaoImpl.class);
 
     private Connection connection;
-    private UserMapper userMapper = new UserMapper();
+    private final UserMapper userMapper = new UserMapper();
 
     public UserDaoImpl(Connection connection) {
         this.connection = connection;

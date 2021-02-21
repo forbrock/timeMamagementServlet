@@ -2,7 +2,6 @@ package org.servlet.project.model.dto;
 
 import org.servlet.project.model.entity.ActivityState;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class UserActivityDto {
@@ -18,21 +17,11 @@ public class UserActivityDto {
     private String categoryName;
 
     private ActivityState state;
-    private double duration;
-    private LocalDateTime startDate;
 
     public UserActivityDto() {}
 
     public long getId() {
         return id;
-    }
-
-    public double getDuration() {
-        return duration;
-    }
-
-    public LocalDateTime getStartDate() {
-        return startDate;
     }
 
     public ActivityState getState() {
@@ -63,6 +52,21 @@ public class UserActivityDto {
         return categoryName;
     }
 
+    private UserActivityDto(UserActivityDtoBuilder builder) {
+        this.id = builder.id;
+        this.userId = builder.userId;
+        this.email = builder.email;
+        this.activityId = builder.activityId;
+        this.activityName = builder.activityName;
+        this.categoryId = builder.categoryId;
+        this.categoryName = builder.categoryName;
+        this.state = builder.state;
+    }
+
+    public static UserActivityDtoBuilder builder() {
+        return new UserActivityDtoBuilder();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,23 +87,6 @@ public class UserActivityDto {
         return Objects.hash(id, userId, email, activityId, activityName, categoryId, categoryName, state);
     }
 
-    private UserActivityDto(UserActivityDtoBuilder builder) {
-        this.id = builder.id;
-        this.userId = builder.userId;
-        this.email = builder.email;
-        this.activityId = builder.activityId;
-        this.activityName = builder.activityName;
-        this.categoryId = builder.categoryId;
-        this.categoryName = builder.categoryName;
-        this.state = builder.state;
-        this.duration = builder.duration;
-        this.startDate = builder.startDate;
-    }
-
-    public static UserActivityDtoBuilder builder() {
-        return new UserActivityDtoBuilder();
-    }
-
     public static class UserActivityDtoBuilder {
         private long id;
 
@@ -113,8 +100,6 @@ public class UserActivityDto {
         private String categoryName;
 
         private ActivityState state;
-        private double duration;
-        private LocalDateTime startDate;
 
         public UserActivityDtoBuilder id(long id) {
             this.id = id;
@@ -153,16 +138,6 @@ public class UserActivityDto {
 
         public UserActivityDtoBuilder state(ActivityState state) {
             this.state = state;
-            return this;
-        }
-
-        public UserActivityDtoBuilder duration(double duration) {
-            this.duration = duration;
-            return this;
-        }
-
-        public UserActivityDtoBuilder startDate(LocalDateTime startDate) {
-            this.startDate = startDate;
             return this;
         }
 

@@ -3,7 +3,6 @@ package org.servlet.project.controller.command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.servlet.project.MainServlet;
-import org.servlet.project.exceptions.UserNotFoundException;
 import org.servlet.project.model.dto.UserActivityDto;
 import org.servlet.project.model.entity.User;
 import org.servlet.project.model.service.SecurityService;
@@ -36,6 +35,7 @@ public class IndexCommand implements Command {
         HttpSession session = request.getSession();
         User user = securityService.getLoggedUser(session);
 
+        // TODO: move validation to secure filter
         if (Objects.isNull(user)) {
             log.warn("Index controller: User not found, redirect to login page");
             session.invalidate();

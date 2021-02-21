@@ -31,32 +31,32 @@ public class LoginCommand implements Command {
         }
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String goToLogin = "/WEB-INF/view/login.jsp";
 
         // TODO: create a separate validator for these cases
         // TODO: add fields validation
         if(Objects.isNull(email) || Objects.isNull(password) ||
                 email.isEmpty() || password.isBlank()) {
-            return goToLogin;
+            request.setAttribute("loginFieldsEmptyMessage", "valid.login.not.empty");
+            return resolve("login");
         }
 
         // TODO: check validation message
         Optional<User> user = userService.findByEmail(email);
         if (user.isEmpty()) {
             request.setAttribute("loginFailureMessage", "valid.login.login.failure");
-            return goToLogin;
+            return resolve("login");
         }
 
         // TODO: check validation message
         if (securityService.isLogged(request, email)) {
             request.setAttribute("userAlreadyLoggedMessage", "valid.login.already.logged.in");
-            return goToLogin;
+            return resolve("login");
         }
 
         // TODO: check validation message
         if (!securityService.passwordIsValid(password, user.get())) {
             request.setAttribute("passFailureMessage", "valid.login.password.failure");
-            return goToLogin;
+            return resolve("login");
         }
 
         securityService.storeLoggedUser(request.getSession(), user.get());

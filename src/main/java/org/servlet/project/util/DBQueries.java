@@ -9,16 +9,15 @@ public class DBQueries {
             " a.name AS activity_name," +
             " c.id AS category_id," +
             " c.name AS category_name," +
-            " users_activities.state AS state," +
-            " tl.duration AS duration," +
-            " tl.start_date AS start_date" +
+            " users_activities.state AS state" +
             " FROM users_activities" +
             " LEFT JOIN users u ON users_activities.user_id = u.id" +
             " LEFT JOIN activities a ON users_activities.activity_id = a.id" +
             " LEFT JOIN categories c ON a.category_id = c.id" +
-            " LEFT JOIN time_log tl ON users_activities.id = tl.user_activity_id" +
             " WHERE user_id = ?";
 
-    public static final String FIND_BY_ID_QUERY = "select * from users where users.id = ?";
-    public static final String FIND_BY_USERNAME_QUERY = "select * from users where users.email = ?";
+    public static final String FIND_BY_ID_QUERY = "SELECT * FROM users WHERE users.id = ?";
+    public static final String FIND_BY_USERNAME_QUERY = "SELECT * FROM users WHERE users.email = ?";
+    public static final String SAVE_NEW_TIME_POINT_QUERY = "INSERT INTO time_log (duration, user_activity_id, start_date) VALUES (?, ?, ?)";
+    public static final String FIND_BY_USER_ACTIVITY_ID = "SELECT * FROM time_log WHERE user_activity_id = ?";
 }

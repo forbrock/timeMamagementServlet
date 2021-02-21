@@ -20,8 +20,6 @@ public class UserActivityDtoMapper implements ObjectMapper<UserActivityDto> {
                 .categoryId(rs.getLong("category_id"))
                 .categoryName(rs.getString("category_name"))
                 .state(ActivityState.valueOf(rs.getString("state")))
-                .duration(rs.getDouble("duration"))
-                .startDate(rs.getObject("start_date", LocalDateTime.class))
                 .build();
     }
 }

@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.servlet.project.controller.command.*;
 import org.servlet.project.model.service.SecurityService;
+import org.servlet.project.model.service.TimeLogService;
 import org.servlet.project.model.service.UserActivityService;
 import org.servlet.project.model.service.UserService;
 
@@ -26,6 +27,7 @@ public class MainServlet extends HttpServlet {
     private final UserService userService = new UserService();
     private final UserActivityService userActivityService = new UserActivityService();
     private final SecurityService securityService = new SecurityService();
+    private final TimeLogService timeLogService = new TimeLogService();
 
     public void init(ServletConfig servletConfig) {
         servletConfig.getServletContext().setAttribute("loggedUsers", new HashSet<String>());
@@ -35,7 +37,7 @@ public class MainServlet extends HttpServlet {
         commands.put("login", new LoginCommand(userService, securityService));
         commands.put("registration", new RegistrationCommand());
         commands.put("index", indexCommand);
-        commands.put("time", new TimeCommand());
+        commands.put("time", new TimeCommand(timeLogService));
         commands.put("/", indexCommand);
     }
 
