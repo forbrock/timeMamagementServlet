@@ -20,7 +20,9 @@
     <!-- Lang menu  -->
     <div><c:import url="/WEB-INF/view/fragments/lang.jsp"/></div>
 
-    <form action="${contextPath}/logout" name="logout" method="POST">
-        <button type="submit" class="btn btn-outline-info ml-2" name="logout" value="logout">Sign out</button>
+    <button form="sign_out" type="submit" class="btn btn-outline-info ml-2" name="logout" value="logout">
+        <fmt:message key="index.sign.out">sign out</fmt:message>
+    </button>
+    <form id="sign_out" action="${contextPath}/logout" name="logout" method="POST">
     </form>
 </header>

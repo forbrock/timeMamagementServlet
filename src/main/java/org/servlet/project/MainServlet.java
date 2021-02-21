@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import static org.servlet.project.util.ViewResolver.resolve;
@@ -30,7 +29,6 @@ public class MainServlet extends HttpServlet {
     private final TimeLogService timeLogService = new TimeLogService();
 
     public void init(ServletConfig servletConfig) {
-        servletConfig.getServletContext().setAttribute("loggedUsers", new HashSet<String>());
         IndexCommand indexCommand = new IndexCommand(userService, userActivityService, securityService);
 
         commands.put("logout", new LogoutCommand());

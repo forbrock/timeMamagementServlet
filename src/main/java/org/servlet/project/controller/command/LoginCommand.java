@@ -48,19 +48,13 @@ public class LoginCommand implements Command {
         }
 
         // TODO: check validation message
-        if (securityService.isLogged(request, email)) {
-            request.setAttribute("userAlreadyLoggedMessage", "valid.login.already.logged.in");
-            return resolve("login");
-        }
-
-        // TODO: check validation message
         if (!securityService.passwordIsValid(password, user.get())) {
             request.setAttribute("passFailureMessage", "valid.login.password.failure");
             return resolve("login");
         }
 
         securityService.storeLoggedUser(request.getSession(), user.get());
-
-        return "redirect:/index";
+        String uri = securityService.setUriByRole(request);
+        return "redirect:" + uri;
     }
 }

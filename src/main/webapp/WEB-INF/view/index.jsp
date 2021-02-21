@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<div><c:import url="/WEB-INF/view/fragments/user_header.jsp"/></div>
+<c:import url="/WEB-INF/view/fragments/user_header.jsp"/>
 
 <div class="container">
     <!-- Tabs navigation -->
@@ -57,8 +57,8 @@
                     <c:forEach var="ua" items="${requestScope.userActivities}">
                         <c:if test="${ua.state.name() == 'ACCEPTED'}">
                             <tr>
-                                <td><span>${ua.categoryName}</span></td>
-                                <td><span>${ua.activityName}</span></td>
+                                <td><span>${ua.category}</span></td>
+                                <td><span>${ua.activity}</span></td>
                                 <td><span>${ua.state.name()}</span></td>
                                 <td>
                                     <form method="post" action="${contextPath}/time">
@@ -69,8 +69,7 @@
                                         </fieldset>
                                     </form>
                                 </td>
-<%--                                <td><span>${ua.duration}</span></td>--%>
-                                <td><span>total time</span></td>
+                                <td><span>${ua.duration}</span></td>
                                 <td>
                                     <a type="button" class="btn btn-outline-success btn-sm px-2"
                                        href="${contextPath}/complete/${ua.id}">
@@ -123,8 +122,8 @@
                         <c:forEach var="ua" items="${requestScope.userActivities}">
                             <c:if test="${ua.state.name() == 'COMPLETED'}">
                                 <tr>
-                                    <td><span>${ua.categoryName}</span></td>
-                                    <td><span>${ua.activityName}</span></td>
+                                    <td><span>${ua.category}</span></td>
+                                    <td><span>${ua.activity}</span></td>
                                     <td><span>${ua.state.name()}</span></td>
                                     <td><span>${ua.duration}</span></td>
                                 </tr>

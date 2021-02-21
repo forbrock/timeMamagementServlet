@@ -5,7 +5,6 @@ import org.servlet.project.model.entity.ActivityState;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 public class UserActivityDtoMapper implements ObjectMapper<UserActivityDto> {
 
@@ -13,13 +12,11 @@ public class UserActivityDtoMapper implements ObjectMapper<UserActivityDto> {
     public UserActivityDto extract(ResultSet rs) throws SQLException {
         return UserActivityDto.builder()
                 .id(rs.getLong("id"))
-                .userId(rs.getLong("user_id"))
-                .email(rs.getString("user_email"))
-                .activityId(rs.getLong("activity_id"))
-                .activityName(rs.getString("activity_name"))
-                .categoryId(rs.getLong("category_id"))
-                .categoryName(rs.getString("category_name"))
+                .email(rs.getString("email"))
+                .activity(rs.getString("activity"))
+                .category(rs.getString("category"))
                 .state(ActivityState.valueOf(rs.getString("state")))
+                .duration(rs.getDouble("duration"))
                 .build();
     }
 }

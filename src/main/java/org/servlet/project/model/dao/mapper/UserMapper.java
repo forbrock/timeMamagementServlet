@@ -3,7 +3,6 @@ package org.servlet.project.model.dao.mapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.servlet.project.exceptions.UserNotFoundException;
-import org.servlet.project.model.dao.impl.TimeLogDaoImpl;
 import org.servlet.project.model.entity.Role;
 import org.servlet.project.model.entity.User;
 

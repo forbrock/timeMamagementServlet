@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        try (PreparedStatement statement = connection.prepareStatement(DBQueries.FIND_BY_USERNAME_QUERY)) {
+        try (PreparedStatement statement = connection.prepareStatement(DBQueries.FIND_BY_USER_EMAIL_QUERY)) {
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
 
