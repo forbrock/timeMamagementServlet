@@ -5,7 +5,7 @@
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="property/messages"/>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <div class="btn-group shadow-0 float-right">
     <button type="button" class="btn btn-link dropdown-toggle text-dark" data-mdb-toggle="dropdown"
@@ -14,13 +14,14 @@
     <ul class="dropdown-menu">
         <li>
             <a class="dropdown-item" href="?lang=en">
-                <img src="${contextPath}/public/img/united-kingdom.svg" alt="user-image" class="mr-1" height="18">
+<%--                <img src="${contextPath}/public/img/united-kingdom.svg" alt="user-image" class="mr-1" height="18"/>--%>
+                <img src="<c:url value='/public/img/united-kingdom.svg'/>" alt="user-image" class="mr-1" height="18"/>
                 <span class="align-middle"><fmt:message key="lang.en">english</fmt:message></span>
             </a>
         </li>
         <li>
             <a class="dropdown-item" href="?lang=uk">
-                <img src="${contextPath}/public/img/ukraine.svg" alt="user-image" class="mr-1" height="18">
+                <img src="${contextPath}/public/img/ukraine.svg" alt="user-image" class="mr-1" height="18"/>
                 <span class="align-middle"><fmt:message key="lang.uk">ukrainian</fmt:message></span>
             </a>
         </li>

@@ -89,7 +89,7 @@
             <fmt:message key="reg.register">create</fmt:message>
         </button>
         <div class="my-sm-3 m-3 text-right">
-            <a href="${contextPath}/app/login">
+            <a href="${contextPath}/login">
                 <fmt:message key="reg.sign.in">i already have an account</fmt:message>
             </a>
         </div>

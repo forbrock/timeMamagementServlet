@@ -12,7 +12,7 @@
 
     <div style="color: #6c757d">logged user email</div>
 
-    <c:if test="${requestScope.user.hasAuthority('ADMIN')}">
+    <c:if test="${requestScope.loggedUser.hasAuthority('ADMIN')}">
         <nav class="my-2 my-md-0 me-md-3">
             <a class="p-2 text-dark" href="#"><fmt:message key="index.admin.dashboard.link">dashboard</fmt:message></a>
         </nav>
@@ -20,7 +20,7 @@
     <!-- Lang menu  -->
     <div><c:import url="/WEB-INF/view/fragments/lang.jsp"/></div>
 
-    <form action="#" name="logout" method="POST">
+    <form action="${contextPath}/logout" name="logout" method="POST">
         <button type="submit" class="btn btn-outline-info ml-2" name="logout" value="logout">Sign out</button>
     </form>
 </header>

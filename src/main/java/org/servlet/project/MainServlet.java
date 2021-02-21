@@ -41,18 +41,14 @@ public class MainServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response) throws ServletException, IOException {
-        log.info("Method " + request.getMethod());
-
         String contextPath = request.getContextPath();
         String path = request.getRequestURI();
-        log.info("Path " + path);
         path = path.replace(contextPath, "").replaceFirst("/", "");
         Command command = commands.getOrDefault(path, (def) -> resolve("login"));
         String page = command.execute(request);
 
         if (page.contains("redirect:")) {
             String redirectStr = contextPath + page.replace("redirect:", "");
-            log.info(redirectStr);
             response.sendRedirect(redirectStr);
         } else {
             request.getRequestDispatcher(page).forward(request, response);

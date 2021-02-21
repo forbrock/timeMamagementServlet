@@ -27,13 +27,13 @@ public class LoginCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         if (request.getMethod().equals("GET")) {
-            log.info("GET login page");
             return resolve("login");
         }
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String goToLogin = "/WEB-INF/view/login.jsp";
 
+        // TODO: create a separate validator for these cases
         // TODO: add fields validation
         if(Objects.isNull(email) || Objects.isNull(password) ||
                 email.isEmpty() || password.isBlank()) {
@@ -59,7 +59,6 @@ public class LoginCommand implements Command {
             return goToLogin;
         }
 
-//        request.getSession().invalidate();
         securityService.storeLoggedUser(request.getSession(), user.get());
 
         return "redirect:/index";

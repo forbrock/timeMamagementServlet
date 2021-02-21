@@ -12,6 +12,6 @@ public class LogoutCommand implements Command {
         if (Objects.nonNull(session)) {
             session.invalidate();
         }
-        return "login";
+        return "redirect:/login";
     }
 }

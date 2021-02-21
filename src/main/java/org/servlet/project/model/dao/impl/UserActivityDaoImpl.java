@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.servlet.project.model.dao.UserActivityDao;
 import org.servlet.project.model.dao.mapper.UserActivityDtoMapper;
 import org.servlet.project.model.dto.UserActivityDto;
+import org.servlet.project.util.DBQueries;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,25 +17,6 @@ import java.util.Optional;
 
 public class UserActivityDaoImpl implements UserActivityDao {
     private static final Logger log = LogManager.getLogger(UserActivityDaoImpl.class);
-
-    private static final String FIND_BY_USER_ID_QUERY = "SELECT" +
-            " users_activities.id AS id," +
-            " u.id AS user_id," +
-            " u.email AS user_email," +
-            " a.id AS activity_id," +
-            " a.name AS activity_name," +
-            " c.id AS category_id," +
-            " c.name AS category_name," +
-            " users_activities.state AS state," +
-            " tl.duration AS duration," +
-            " tl.start_date AS start_date" +
-            " FROM users_activities" +
-            " LEFT JOIN users u ON users_activities.user_id = u.id" +
-            " LEFT JOIN activities a ON users_activities.activity_id = a.id" +
-            " LEFT JOIN categories c ON a.category_id = c.id" +
-            " LEFT JOIN time_log tl ON users_activities.id = tl.user_activity_id" +
-            " WHERE user_id = ?";
-
     private Connection connection;
     private UserActivityDtoMapper uaMapper = new UserActivityDtoMapper();
 
@@ -44,7 +26,7 @@ public class UserActivityDaoImpl implements UserActivityDao {
 
     @Override
     public List<UserActivityDto> findByUserId(long id) {
-        try (PreparedStatement statement = connection.prepareStatement(FIND_BY_USER_ID_QUERY)) {
+        try (PreparedStatement statement = connection.prepareStatement(DBQueries.FIND_BY_USER_ID_QUERY)) {
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
             return extractAllActivities(rs);

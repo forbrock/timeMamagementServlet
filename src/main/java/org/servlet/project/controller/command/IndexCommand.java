@@ -13,6 +13,7 @@ import org.servlet.project.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 import static org.servlet.project.util.ViewResolver.resolve;
 
@@ -33,13 +34,17 @@ public class IndexCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = userService.findByEmail(
-                securityService.getLoggedUser(session).getEmail()).orElseThrow(() ->
-                new UserNotFoundException("User not found"));
-        log.info("Before userActivityDtos");
+        User user = securityService.getLoggedUser(session);
+
+        if (Objects.isNull(user)) {
+            log.warn("Index controller: User not found, redirect to login page");
+            session.invalidate();
+            return "redirect:/login";
+        }
+
+        user = userService.findByEmail(securityService.getLoggedUser(session).getEmail()).get();
         List<UserActivityDto> userActivityDtos = userActivityService.findByUserId(user.getId());
         request.setAttribute("userActivities", userActivityDtos);
-        log.info("userActivityDtos {}", userActivityDtos);
         return resolve("index");
     }
 }

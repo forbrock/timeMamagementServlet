@@ -64,7 +64,7 @@
                                     <form method="post" action="${contextPath}/time">
                                         <fieldset title="<fmt:message key="valid.index.tab.current.table.content.time.tooltip">constraints</fmt:message>">
                                             <input type="number" name="time" min="0.5" max="12" step="0.5" required>
-                                            <input type="text" name="userActionId" value="${ua.id}" hidden>
+                                            <input type="text" name="uaId" value="${ua.id}" hidden>
                                             <input type="submit" value="<fmt:message key="index.tab.current.table.content.add.time">add time</fmt:message>">
                                         </fieldset>
                                     </form>

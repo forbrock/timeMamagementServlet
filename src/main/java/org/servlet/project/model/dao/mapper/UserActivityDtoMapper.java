@@ -6,7 +6,6 @@ import org.servlet.project.model.entity.ActivityState;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.Map;
 
 public class UserActivityDtoMapper implements ObjectMapper<UserActivityDto> {
 

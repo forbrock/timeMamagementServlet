@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.servlet.project.model.dao.UserDao;
 import org.servlet.project.model.dao.mapper.UserMapper;
 import org.servlet.project.model.entity.User;
+import org.servlet.project.util.DBQueries;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,9 +17,6 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
     private static final Logger log = LogManager.getLogger(UserDaoImpl.class);
 
-    private static final String FIND_BY_ID_QUERY = "select * from users where users.id = ?";
-    private static final String FIND_BY_USERNAME_QUERY = "select * from users where users.email = ?";
-
     private Connection connection;
     private UserMapper userMapper = new UserMapper();
 
@@ -28,7 +26,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findById(long id) {
-        try (PreparedStatement ps = connection.prepareStatement(FIND_BY_ID_QUERY)){
+        try (PreparedStatement ps = connection.prepareStatement(DBQueries.FIND_BY_ID_QUERY)){
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             return Optional.ofNullable(userMapper.extract(rs));
@@ -39,7 +37,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        try (PreparedStatement statement = connection.prepareStatement(FIND_BY_USERNAME_QUERY)) {
+        try (PreparedStatement statement = connection.prepareStatement(DBQueries.FIND_BY_USERNAME_QUERY)) {
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
 
