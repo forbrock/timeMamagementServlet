@@ -16,22 +16,22 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${contextPath}/admin/users">
+                <a class="nav-link" href="${contextPath}/users">
                     <fmt:message key="admin.dashboard.all.users">All users</fmt:message>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${contextPath}/admin/categories">
+                <a class="nav-link" href="${contextPath}/categories">
                     <fmt:message key="admin.dashboard.categories">Categories</fmt:message>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${contextPath}/admin/activities">
+                <a class="nav-link" href="${contextPath}/activities">
                     <fmt:message key="admin.dashboard.activities">Activities</fmt:message>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${contextPath}/admin/report">
+                <a class="nav-link" href="${contextPath}/report">
                     <fmt:message key="admin.dashboard.report">Report</fmt:message>
                 </a>
             </li>

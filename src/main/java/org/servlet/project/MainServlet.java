@@ -38,6 +38,7 @@ public class MainServlet extends HttpServlet {
         commands.put("complete", new CompleteCommand(userActivityService));
         commands.put("request_activity", new RequestActivityCommand(userActivityService, securityService));
         commands.put("admin", new AdminCommand(userActivityService));
+        commands.put("report", new AdminReportCommand(userActivityService));
     }
 
     private void processRequest(HttpServletRequest request,
