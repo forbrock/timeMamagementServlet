@@ -13,7 +13,7 @@
 <!-- Bootstrap core CSS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
-<link rel="stylesheet" href="<c:url value = "../../../public/css/admin.css"/>">
+<link rel="stylesheet" type="text/css" href="${pageContext}/public/css/admin.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css" rel="stylesheet" />
 <style>
     a.disabled {
