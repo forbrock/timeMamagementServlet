@@ -11,13 +11,13 @@ import java.util.Objects;
 
 import static org.servlet.project.util.ViewResolver.resolve;
 
-public class RequestActivityCommand implements Command {
-    private static final Logger log = LogManager.getLogger(RequestActivityCommand.class);
+public class RequestActivity implements Command {
+    private static final Logger log = LogManager.getLogger(RequestActivity.class);
 
     private final UserActivityService userActivityService;
     private final SecurityService securityService;
 
-    public RequestActivityCommand(UserActivityService userActivityService, SecurityService securityService) {
+    public RequestActivity(UserActivityService userActivityService, SecurityService securityService) {
         this.userActivityService = userActivityService;
         this.securityService = securityService;
     }

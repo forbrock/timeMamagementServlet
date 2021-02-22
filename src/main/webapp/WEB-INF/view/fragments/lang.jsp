@@ -15,7 +15,7 @@
         <li>
             <a class="dropdown-item" href="?lang=en">
 <%--                <img src="${contextPath}/public/img/united-kingdom.svg" alt="user-image" class="mr-1" height="18"/>--%>
-                <img src="<c:url value='/public/img/united-kingdom.svg'/>" alt="user-image" class="mr-1" height="18"/>
+                <img src="${contextPath}/public/img/united-kingdom.svg" alt="user-image" class="mr-1" height="18"/>
                 <span class="align-middle"><fmt:message key="lang.en">english</fmt:message></span>
             </a>
         </li>

@@ -9,7 +9,7 @@ public class DBQueries {
             " ua.state      AS state," +
             " SUM(duration) AS duration" +
             " FROM time_log" +
-            "       LEFT JOIN users_activities ua ON time_log.user_activity_id = ua.id" +
+            "       RIGHT JOIN users_activities ua ON time_log.user_activity_id = ua.id" +
             "       LEFT JOIN users u             ON ua.user_id = u.id" +
             "       LEFT JOIN activities a        ON ua.activity_id = a.id" +
             "       LEFT JOIN categories c        ON a.category_id = c.id" +
@@ -30,10 +30,18 @@ public class DBQueries {
             "         LEFT JOIN categories c         ON a.category_id = c.id" +
             " GROUP BY ua.id";
 
+    public static final String FIND_REQUESTED_AND_CURRENT_ACTIVITIES = "SELECT" +
+            " *" +
+            " FROM users_activities" +
+            " WHERE user_id = ?" +
+            "   AND activity_id = ?" +
+            "   AND state IN ('ACCEPTED', 'REQUESTED')";
+
     public static final String FIND_BY_ID_QUERY = "SELECT * FROM users WHERE users.id = ?";
     public static final String FIND_BY_USER_EMAIL_QUERY = "SELECT * FROM users WHERE users.email = ?";
     public static final String SAVE_NEW_TIME_POINT_QUERY = "INSERT INTO time_log (duration, user_activity_id, start_date) VALUES (?, ?, ?)";
     public static final String UPDATE_ACTIVITY_STATUS_QUERY = "UPDATE users_activities SET state = ? WHERE id = ?";
     public static final String FIND_ALL_ACTIVITIES_QUERY = "SELECT * FROM activities";
     public static final String SAVE_USER_ACTIVITY_QUERY = "INSERT INTO users_activities (user_id, activity_id, state) VALUES (?, ?, ?)";
+    public static final String DELETE_USER_ACTIVITY_BY_ID = "DELETE FROM users_activities WHERE id = ?";
 }

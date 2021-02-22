@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import static org.servlet.project.util.ViewResolver.resolve;
 
-public class RegistrationCommand implements Command {
+public class Registration implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {

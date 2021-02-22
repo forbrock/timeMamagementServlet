@@ -19,13 +19,13 @@
                 <ul class="dropdown-menu">
                     <li>
                         <a class="dropdown-item" href="?lang=en">
-                            <img src="${contextPath}/public/img/united-kingdom.svg" alt="user-image" class="mr-1" height="18">
+                            <img src="/public/img/united-kingdom.svg" alt="user-image" class="mr-1" height="18">
                             <span class="align-middle"><fmt:message key="lang.en">english</fmt:message></span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="?lang=uk">
-                            <img src="${contextPath}/public/img/ukraine.svg" alt="user-image" class="mr-1" height="18">
+                            <img src="/public/img/ukraine.svg" alt="user-image" class="mr-1" height="18">
                             <span class="align-middle"><fmt:message key="lang.uk">ukrainian</fmt:message></span>
                         </a>
                     </li>

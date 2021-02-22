@@ -2,7 +2,6 @@ package org.servlet.project.controller.command;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.servlet.project.MainServlet;
 import org.servlet.project.model.dto.UserActivityDto;
 import org.servlet.project.model.entity.Activity;
 import org.servlet.project.model.entity.User;
@@ -18,16 +17,16 @@ import java.util.Objects;
 
 import static org.servlet.project.util.ViewResolver.resolve;
 
-public class IndexCommand implements Command {
-    private static final Logger log = LogManager.getLogger(MainServlet.class);
+public class Index implements Command {
+    private static final Logger log = LogManager.getLogger(Index.class);
     private UserService userService;
     private UserActivityService userActivityService;
     private SecurityService securityService;
     private ActivityService activityService;
 
-    public IndexCommand(UserService userService,
-                        UserActivityService userActivityService,
-                        SecurityService securityService, ActivityService activityService) {
+    public Index(UserService userService,
+                 UserActivityService userActivityService,
+                 SecurityService securityService, ActivityService activityService) {
         this.userService = userService;
         this.userActivityService = userActivityService;
         this.securityService = securityService;

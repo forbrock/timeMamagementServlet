@@ -9,12 +9,12 @@ import java.util.Objects;
 
 import static org.servlet.project.util.ViewResolver.resolve;
 
-public class TimeCommand implements Command {
-    private static final Logger log = LogManager.getLogger(TimeCommand.class);
+public class Time implements Command {
+    private static final Logger log = LogManager.getLogger(Time.class);
 
     private final TimeLogService timeLogService;
 
-    public TimeCommand(TimeLogService timeLogService) {
+    public Time(TimeLogService timeLogService) {
         this.timeLogService = timeLogService;
     }
 

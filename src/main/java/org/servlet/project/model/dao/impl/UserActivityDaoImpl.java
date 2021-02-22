@@ -18,7 +18,7 @@ import java.util.Optional;
 public class UserActivityDaoImpl implements UserActivityDao {
     private static final Logger log = LogManager.getLogger(UserActivityDaoImpl.class);
     private Connection connection;
-    private UserActivityDtoMapper uaMapper = new UserActivityDtoMapper();
+    private final UserActivityDtoMapper uaMapper = new UserActivityDtoMapper();
 
     public UserActivityDaoImpl(Connection connection) {
         this.connection = connection;
@@ -49,21 +49,50 @@ public class UserActivityDaoImpl implements UserActivityDao {
         return false;
     }
 
+    // TODO: is need transaction?
     @Override
     public UserActivity save(UserActivity ua) {
+        if (checkRequested(ua)) {
+            log.info("Such activity already requested, id: {}", ua.getActivityId());
+            throw new ActivityAlreadyExistException();
+        }
+
         try (PreparedStatement statement =
                      connection.prepareStatement(DBQueries.SAVE_USER_ACTIVITY_QUERY)) {
+
             statement.setLong(1, ua.getUserId());
             statement.setLong(2, ua.getActivityId());
             statement.setString(3, ua.getState().name());
             statement.executeUpdate();
-        } catch (SQLIntegrityConstraintViolationException ex1) {
-            log.warn("Such activity already exists. {}", ex1.getMessage());
-            throw new ActivityAlreadyExistException();
-        } catch (SQLException ex2) {
-            log.error("Can't save new user activity request", ex2);
+        } catch (SQLException ex1) {
+            log.error("Can't save new user activity request", ex1);
         }
         return ua;
+    }
+
+    @Override
+    public boolean delete(long id) {
+        try (PreparedStatement statement =
+                connection.prepareStatement(DBQueries.DELETE_USER_ACTIVITY_BY_ID)) {
+            statement.setLong(1, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            log.error(e);
+        }
+        return false;
+    }
+
+    private boolean checkRequested(UserActivity ua) {
+        try (PreparedStatement statement =
+                connection.prepareStatement(DBQueries.FIND_REQUESTED_AND_CURRENT_ACTIVITIES)) {
+            statement.setLong(1, ua.getUserId());
+            statement.setLong(2, ua.getActivityId());
+            ResultSet rs = statement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            log.error(e);
+        }
+        return false;
     }
 
     @Override

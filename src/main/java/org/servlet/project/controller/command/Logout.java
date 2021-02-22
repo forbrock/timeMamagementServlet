@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
-public class LogoutCommand implements Command {
+public class Logout implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {

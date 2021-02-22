@@ -27,18 +27,20 @@ public class MainServlet extends HttpServlet {
     private final ActivityService activityService = new ActivityService();
 
     public void init(ServletConfig servletConfig) {
-        IndexCommand indexCommand = new IndexCommand(userService, userActivityService, securityService, activityService);
+        Index indexCommand = new Index(userService, userActivityService, securityService, activityService);
 
-        commands.put("logout", new LogoutCommand());
-        commands.put("login", new LoginCommand(userService, securityService));
-        commands.put("registration", new RegistrationCommand());
+        commands.put("logout", new Logout());
+        commands.put("login", new Login(userService, securityService));
+        commands.put("registration", new Registration());
         commands.put("index", indexCommand);
         commands.put("/", indexCommand);
-        commands.put("time", new TimeCommand(timeLogService));
-        commands.put("complete", new CompleteCommand(userActivityService));
-        commands.put("request_activity", new RequestActivityCommand(userActivityService, securityService));
-        commands.put("admin", new AdminCommand(userActivityService));
-        commands.put("report", new AdminReportCommand(userActivityService));
+        commands.put("time", new Time(timeLogService));
+        commands.put("complete", new CompleteActivity(userActivityService));
+        commands.put("request_activity", new RequestActivity(userActivityService, securityService));
+        commands.put("admin", new Admin(userActivityService));
+        commands.put("report", new AdminReport(userActivityService));
+        commands.put("admin/request/accept", new AdminAcceptActivity(userActivityService));
+        commands.put("admin/request/decline", new RejectRequest(userActivityService));
     }
 
     private void processRequest(HttpServletRequest request,

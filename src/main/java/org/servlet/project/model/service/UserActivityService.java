@@ -32,4 +32,12 @@ public class UserActivityService {
     public List<UserActivityDto> findAll() {
         return uaDao.findAll();
     }
+
+    public boolean acceptActivity(long id) {
+        return uaDao.updateActivityState(ActivityState.ACCEPTED, id);
+    }
+
+    public boolean rejectRequest(long id) {
+        return uaDao.delete(id);
+    }
 }

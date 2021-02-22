@@ -2,7 +2,6 @@ package org.servlet.project.controller.command;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.servlet.project.MainServlet;
 import org.servlet.project.model.entity.User;
 import org.servlet.project.model.service.SecurityService;
 import org.servlet.project.model.service.UserService;
@@ -13,13 +12,13 @@ import java.util.Optional;
 
 import static org.servlet.project.util.ViewResolver.resolve;
 
-public class LoginCommand implements Command {
-    private static final Logger log = LogManager.getLogger(LoginCommand.class);
+public class Login implements Command {
+    private static final Logger log = LogManager.getLogger(Login.class);
 
     private final UserService userService;
     private final SecurityService securityService;
 
-    public LoginCommand(UserService userService, SecurityService securityService) {
+    public Login(UserService userService, SecurityService securityService) {
         this.userService = userService;
         this.securityService = securityService;
     }

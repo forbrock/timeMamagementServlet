@@ -6,11 +6,11 @@ import org.servlet.project.model.service.UserActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class CompleteCommand implements Command {
-    private static final Logger log = LogManager.getLogger(CompleteCommand.class);
+public class CompleteActivity implements Command {
+    private static final Logger log = LogManager.getLogger(CompleteActivity.class);
     private final UserActivityService userActivityService;
 
-    public CompleteCommand(UserActivityService userActivityService) {
+    public CompleteActivity(UserActivityService userActivityService) {
         this.userActivityService = userActivityService;
     }
 

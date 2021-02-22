@@ -43,13 +43,13 @@
                                     <td><span>${activity.state.name()}</span></td>
                                     <td>
                                         <a type="button" class="btn btn-outline-success btn-sm px-2"
-                                           href="${contextPath}/admin/request/confirm?id=${activity.id}">
-                                            <fmt:message key="admin.user.activities.table.button.confirm">Confirm</fmt:message>
+                                           href="${contextPath}/admin/request/accept?id=${activity.id}">
+                                            <fmt:message key="admin.user.activities.table.button.confirm">confirm</fmt:message>
                                         </a>
 
                                         <a type="button" class="btn btn-outline-danger btn-sm px-2"
-                                           href="${contextPath}/admin/request/delete?id=${activity.id}">
-                                            <fmt:message key="admin.user.activities.table.button.delete">Delete</fmt:message>
+                                           href="${contextPath}/admin/request/decline?id=${activity.id}">
+                                            <fmt:message key="admin.user.activities.table.button.decline">decline</fmt:message>
                                         </a>
                                     </td>
                                 </tr>
