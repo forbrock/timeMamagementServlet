@@ -57,13 +57,25 @@ public class UserActivityDaoImpl implements UserActivityDao {
             statement.setLong(2, ua.getActivityId());
             statement.setString(3, ua.getState().name());
             statement.executeUpdate();
-        } catch (SQLIntegrityConstraintViolationException e) {
-            log.warn("Such activity already exists", e);
+        } catch (SQLIntegrityConstraintViolationException ex1) {
+            log.warn("Such activity already exists. {}", ex1.getMessage());
             throw new ActivityAlreadyExistException();
-        } catch (SQLException e) {
-            log.error("Can't save new user activity request");
+        } catch (SQLException ex2) {
+            log.error("Can't save new user activity request", ex2);
         }
         return ua;
+    }
+
+    @Override
+    public List<UserActivityDto> findAll() {
+        try (PreparedStatement statement =
+                connection.prepareStatement(DBQueries.FIND_ALL_USERS_ACTIVITIES_QUERY)) {
+            ResultSet rs = statement.executeQuery();
+            return uaMapper.extractAll(rs);
+        } catch (SQLException e) {
+            log.error("ERROR: Can't find any activities", e);
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -74,11 +86,6 @@ public class UserActivityDaoImpl implements UserActivityDao {
     @Override
     public Optional<UserActivityDto> findById(long id) {
         return Optional.empty();
-    }
-
-    @Override
-    public List<UserActivityDto> findAll() {
-        return null;
     }
 
     @Override

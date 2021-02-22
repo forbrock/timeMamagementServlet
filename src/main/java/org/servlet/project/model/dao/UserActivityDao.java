@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface UserActivityDao extends Dao<UserActivityDto> {
     List<UserActivityDto> findByUserId(long id);
+    List<UserActivityDto> findAll();
     boolean updateActivityState(ActivityState state, long id);
     UserActivity save(UserActivity ua) throws ActivityAlreadyExistException;
 }

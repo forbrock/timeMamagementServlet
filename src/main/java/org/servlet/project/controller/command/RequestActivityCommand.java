@@ -14,8 +14,8 @@ import static org.servlet.project.util.ViewResolver.resolve;
 public class RequestActivityCommand implements Command {
     private static final Logger log = LogManager.getLogger(RequestActivityCommand.class);
 
-    private UserActivityService userActivityService;
-    private SecurityService securityService;
+    private final UserActivityService userActivityService;
+    private final SecurityService securityService;
 
     public RequestActivityCommand(UserActivityService userActivityService, SecurityService securityService) {
         this.userActivityService = userActivityService;
@@ -33,7 +33,6 @@ public class RequestActivityCommand implements Command {
         long activityId = Long.parseLong(id);
         long userId = securityService.getLoggedUser(request.getSession()).getId();
 
-        // TODO: add validation message to the front
         try {
             userActivityService.createRequest(userId, activityId);
         } catch (ActivityAlreadyExistException e) {
@@ -41,6 +40,7 @@ public class RequestActivityCommand implements Command {
             return resolve("index");
         }
         request.setAttribute("request_success_message", true);
+        log.info("Activity requested successfully [user id: {}, activity id: {}]", userId, activityId);
         return resolve("index");
     }
 }

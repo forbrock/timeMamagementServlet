@@ -28,4 +28,8 @@ public class UserActivityService {
                 .state(ActivityState.REQUESTED)
                 .build());
     }
+
+    public List<UserActivityDto> findAll() {
+        return uaDao.findAll();
+    }
 }

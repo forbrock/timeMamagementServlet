@@ -37,6 +37,7 @@ public class MainServlet extends HttpServlet {
         commands.put("time", new TimeCommand(timeLogService));
         commands.put("complete", new CompleteCommand(userActivityService));
         commands.put("request_activity", new RequestActivityCommand(userActivityService, securityService));
+        commands.put("admin", new AdminCommand(userActivityService));
     }
 
     private void processRequest(HttpServletRequest request,
@@ -44,6 +45,9 @@ public class MainServlet extends HttpServlet {
         String contextPath = request.getContextPath();
         String path = request.getRequestURI();
         path = path.replace(contextPath, "").replaceFirst("/", "");
+        if (path.isEmpty()) {
+            path = "index";
+        }
         Command command = commands.getOrDefault(path, (def) -> resolve("login"));
         String page = command.execute(request);
 

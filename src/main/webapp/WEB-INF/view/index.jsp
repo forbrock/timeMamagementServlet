@@ -12,8 +12,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Management</title>
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.2.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -143,7 +141,7 @@
         </div>
     </c:if>
     <c:if test="${requestScope.request_failure_message == true}">
-        <div class="alert alert-success alert" role="alert">
+        <div class="alert alert-danger alert" role="alert">
             <fmt:message key="valid.index.requested.activity.message.failure"/>
             <a href="${contextPath}/index">
                 <fmt:message key="valid.index.requested.activity.message.failure.return">return</fmt:message>

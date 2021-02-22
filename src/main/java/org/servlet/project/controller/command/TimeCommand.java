@@ -12,7 +12,7 @@ import static org.servlet.project.util.ViewResolver.resolve;
 public class TimeCommand implements Command {
     private static final Logger log = LogManager.getLogger(TimeCommand.class);
 
-    private TimeLogService timeLogService;
+    private final TimeLogService timeLogService;
 
     public TimeCommand(TimeLogService timeLogService) {
         this.timeLogService = timeLogService;

@@ -7,6 +7,8 @@ import org.servlet.project.model.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static org.servlet.project.util.ViewResolver.resolveAdmin;
+
 public class SecurityService {
 
     public User getLoggedUser(HttpSession session) {
@@ -20,7 +22,7 @@ public class SecurityService {
     public String setUriByRole(HttpServletRequest request) {
         User user = getLoggedUser(request.getSession());
         if (user.getRole() == Role.ADMIN) {
-            return "/admin/admin";
+            return "/admin";
         }
         return "/index";
     }
