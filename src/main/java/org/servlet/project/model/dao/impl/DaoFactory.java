@@ -1,5 +1,6 @@
 package org.servlet.project.model.dao.impl;
 
+import org.servlet.project.model.dao.ActivityDao;
 import org.servlet.project.model.dao.TimeLogDao;
 import org.servlet.project.model.dao.UserActivityDao;
 import org.servlet.project.model.dao.UserDao;
@@ -18,5 +19,9 @@ public class DaoFactory {
 
     public static TimeLogDao createTimeLogDao() {
         return new TimeLogDaoImpl(getConnection());
+    }
+
+    public static ActivityDao createActivityDao() {
+        return new ActivityDaoImpl(getConnection());
     }
 }

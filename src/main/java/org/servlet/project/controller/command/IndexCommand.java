@@ -6,6 +6,7 @@ import org.servlet.project.MainServlet;
 import org.servlet.project.model.dto.UserActivityDto;
 import org.servlet.project.model.entity.Activity;
 import org.servlet.project.model.entity.User;
+import org.servlet.project.model.service.ActivityService;
 import org.servlet.project.model.service.SecurityService;
 import org.servlet.project.model.service.UserActivityService;
 import org.servlet.project.model.service.UserService;
@@ -22,13 +23,15 @@ public class IndexCommand implements Command {
     private UserService userService;
     private UserActivityService userActivityService;
     private SecurityService securityService;
+    private ActivityService activityService;
 
     public IndexCommand(UserService userService,
                         UserActivityService userActivityService,
-                        SecurityService securityService) {
+                        SecurityService securityService, ActivityService activityService) {
         this.userService = userService;
         this.userActivityService = userActivityService;
         this.securityService = securityService;
+        this.activityService = activityService;
     }
 
     @Override
@@ -45,8 +48,10 @@ public class IndexCommand implements Command {
 
         user = userService.findByEmail(securityService.getLoggedUser(session).getEmail()).get();
         List<UserActivityDto> userActivityDtos = userActivityService.findByUserId(user.getId());
+        List<Activity> activities = activityService.findAll();
 
         request.setAttribute("userActivities", userActivityDtos);
+        request.setAttribute("activities", activities);
         return resolve("index");
     }
 }

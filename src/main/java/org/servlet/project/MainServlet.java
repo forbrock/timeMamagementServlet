@@ -3,10 +3,7 @@ package org.servlet.project;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.servlet.project.controller.command.*;
-import org.servlet.project.model.service.SecurityService;
-import org.servlet.project.model.service.TimeLogService;
-import org.servlet.project.model.service.UserActivityService;
-import org.servlet.project.model.service.UserService;
+import org.servlet.project.model.service.*;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -27,9 +24,10 @@ public class MainServlet extends HttpServlet {
     private final UserActivityService userActivityService = new UserActivityService();
     private final SecurityService securityService = new SecurityService();
     private final TimeLogService timeLogService = new TimeLogService();
+    private final ActivityService activityService = new ActivityService();
 
     public void init(ServletConfig servletConfig) {
-        IndexCommand indexCommand = new IndexCommand(userService, userActivityService, securityService);
+        IndexCommand indexCommand = new IndexCommand(userService, userActivityService, securityService, activityService);
 
         commands.put("logout", new LogoutCommand());
         commands.put("login", new LoginCommand(userService, securityService));
@@ -38,6 +36,7 @@ public class MainServlet extends HttpServlet {
         commands.put("/", indexCommand);
         commands.put("time", new TimeCommand(timeLogService));
         commands.put("complete", new CompleteCommand(userActivityService));
+        commands.put("request_activity", new RequestActivityCommand(userActivityService, securityService));
     }
 
     private void processRequest(HttpServletRequest request,

@@ -54,17 +54,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public long save(User user) {
-        return 0;
+    public User save(User user) {
+        return null;
     }
 
     @Override
-    public void update(User user) {
-
+    public User update(User user) {
+        return null;
     }
 
     @Override
-    public void delete(User user) {
-
+    public User delete(User user) {
+        return null;
     }
 }

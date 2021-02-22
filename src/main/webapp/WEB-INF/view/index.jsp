@@ -134,7 +134,7 @@
             </table>
         </div>
     </div>
-    <c:if test="${requestScope.request_success_message != null}">
+    <c:if test="${requestScope.request_success_message == true}">
         <div class="alert alert-success alert" role="alert">
             <fmt:message key="valid.index.requested.activity.message.success"/>
             <a href="${contextPath}/index">
@@ -142,7 +142,7 @@
             </a>
         </div>
     </c:if>
-    <c:if test="${requestScope.request_success_message != null}">
+    <c:if test="${requestScope.request_failure_message == true}">
         <div class="alert alert-success alert" role="alert">
             <fmt:message key="valid.index.requested.activity.message.failure"/>
             <a href="${contextPath}/index">

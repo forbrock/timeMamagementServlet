@@ -3,8 +3,9 @@ package org.servlet.project.model.service;
 import org.servlet.project.model.dao.UserActivityDao;
 import org.servlet.project.model.dao.impl.DaoFactory;
 import org.servlet.project.model.dto.UserActivityDto;
-import org.servlet.project.model.entity.Activity;
 import org.servlet.project.model.entity.ActivityState;
+import org.servlet.project.model.entity.User;
+import org.servlet.project.model.entity.UserActivity;
 
 import java.util.List;
 
@@ -18,5 +19,13 @@ public class UserActivityService {
 
     public boolean completeTask(long id) {
         return uaDao.updateActivityState(ActivityState.COMPLETED, id);
+    }
+
+    public UserActivity createRequest(long userId, long activityId) {
+        return uaDao.save(UserActivity.builder()
+                .userId(userId)
+                .activityId(activityId)
+                .state(ActivityState.REQUESTED)
+                .build());
     }
 }

@@ -8,6 +8,7 @@ import org.servlet.project.model.entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserMapper implements ObjectMapper<User> {
     private static final Logger log = LogManager.getLogger(UserMapper.class);
@@ -33,5 +34,10 @@ public class UserMapper implements ObjectMapper<User> {
             log.error("User not found", e);
         }
         return user;
+    }
+
+    @Override
+    public List<User> extractAll(ResultSet rs) throws SQLException {
+        throw new UnsupportedOperationException();
     }
 }

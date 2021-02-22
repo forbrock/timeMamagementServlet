@@ -20,4 +20,6 @@ public class DBQueries {
     public static final String FIND_BY_USER_EMAIL_QUERY = "SELECT * FROM users WHERE users.email = ?";
     public static final String SAVE_NEW_TIME_POINT_QUERY = "INSERT INTO time_log (duration, user_activity_id, start_date) VALUES (?, ?, ?)";
     public static final String UPDATE_ACTIVITY_STATUS_QUERY = "UPDATE users_activities SET state = ? WHERE id = ?";
+    public static final String FIND_ALL_ACTIVITIES_QUERY = "SELECT * FROM activities";
+    public static final String SAVE_USER_ACTIVITY_QUERY = "INSERT INTO users_activities (user_id, activity_id, state) VALUES (?, ?, ?)";
 }

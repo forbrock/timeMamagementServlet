@@ -1,5 +1,7 @@
 package org.servlet.project.model.entity;
 
+import java.util.Objects;
+
 public class Activity {
     private long id;
     private String name;
@@ -8,8 +10,7 @@ public class Activity {
         this.name = name;
     }
 
-    public Activity() {
-    }
+    public Activity() {}
 
     public long getId() {
         return id;
@@ -17,6 +18,20 @@ public class Activity {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Activity activity = (Activity) o;
+        return id == activity.id &&
+                name.equals(activity.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
     private Activity(ActivityBuilder builder) {
@@ -28,7 +43,7 @@ public class Activity {
         return new ActivityBuilder();
     }
 
-    private static class ActivityBuilder {
+    public static class ActivityBuilder {
         private long id;
         private String name;
 

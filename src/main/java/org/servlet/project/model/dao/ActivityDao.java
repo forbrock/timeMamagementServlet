@@ -1,4 +1,6 @@
 package org.servlet.project.model.dao;
 
-public interface ActivityDao {
+import org.servlet.project.model.entity.Activity;
+
+public interface ActivityDao extends Dao<Activity> {
 }

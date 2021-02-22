@@ -32,8 +32,8 @@
                                 </label>
                                 <select class="form-control" name="activityId" id="activity">
                                     <c:forEach var="activity" items="${requestScope.activities}">
-                                        <option>
-                                            <c:out value="${activity}"/>
+                                        <option value="${activity.id}">
+                                            <c:out value="${activity.name}"/>
                                         </option>
                                     </c:forEach>
                                 </select>

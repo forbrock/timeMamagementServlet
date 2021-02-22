@@ -5,6 +5,8 @@ import org.servlet.project.model.entity.ActivityState;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserActivityDtoMapper implements ObjectMapper<UserActivityDto> {
 
@@ -18,5 +20,16 @@ public class UserActivityDtoMapper implements ObjectMapper<UserActivityDto> {
                 .state(ActivityState.valueOf(rs.getString("state")))
                 .duration(rs.getDouble("duration"))
                 .build();
+    }
+
+    @Override
+    public List<UserActivityDto> extractAll(ResultSet rs) throws SQLException {
+        List<UserActivityDto> list = new ArrayList<>();
+
+        while (rs.next()) {
+            UserActivityDto uaDto = extract(rs);
+            list.add(uaDto);
+        }
+        return list;
     }
 }
