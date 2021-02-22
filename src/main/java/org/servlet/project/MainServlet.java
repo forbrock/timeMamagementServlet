@@ -35,8 +35,9 @@ public class MainServlet extends HttpServlet {
         commands.put("login", new LoginCommand(userService, securityService));
         commands.put("registration", new RegistrationCommand());
         commands.put("index", indexCommand);
-        commands.put("time", new TimeCommand(timeLogService));
         commands.put("/", indexCommand);
+        commands.put("time", new TimeCommand(timeLogService));
+        commands.put("complete", new CompleteCommand(userActivityService));
     }
 
     private void processRequest(HttpServletRequest request,

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.servlet.project.model.dao.UserActivityDao;
 import org.servlet.project.model.dao.mapper.UserActivityDtoMapper;
 import org.servlet.project.model.dto.UserActivityDto;
+import org.servlet.project.model.entity.ActivityState;
 import org.servlet.project.util.DBQueries;
 
 import java.sql.Connection;
@@ -34,6 +35,19 @@ public class UserActivityDaoImpl implements UserActivityDao {
             log.warn("User activities not found: {}", id);
             throw new RuntimeException();
         }
+    }
+
+    @Override
+    public boolean updateActivityState(ActivityState state, long id) {
+        try (PreparedStatement statement =
+                     connection.prepareStatement(DBQueries.UPDATE_ACTIVITY_STATUS_QUERY)) {
+            statement.setString(1, state.name());
+            statement.setLong(2, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            log.error("Failed to update status", e);
+        }
+        return false;
     }
 
     private List<UserActivityDto> extractAllActivities(ResultSet rs) throws SQLException {

@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.servlet.project.MainServlet;
 import org.servlet.project.model.dto.UserActivityDto;
+import org.servlet.project.model.entity.Activity;
 import org.servlet.project.model.entity.User;
 import org.servlet.project.model.service.SecurityService;
 import org.servlet.project.model.service.UserActivityService;
@@ -44,6 +45,7 @@ public class IndexCommand implements Command {
 
         user = userService.findByEmail(securityService.getLoggedUser(session).getEmail()).get();
         List<UserActivityDto> userActivityDtos = userActivityService.findByUserId(user.getId());
+
         request.setAttribute("userActivities", userActivityDtos);
         return resolve("index");
     }

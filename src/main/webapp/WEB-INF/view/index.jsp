@@ -61,7 +61,7 @@
                                 <td><span>${ua.activity}</span></td>
                                 <td><span>${ua.state.name()}</span></td>
                                 <td>
-                                    <form method="post" action="${contextPath}/time">
+                                    <form method="post" action="${contextPath}/time" class="m-0">
                                         <fieldset title="<fmt:message key="valid.index.tab.current.table.content.time.tooltip">constraints</fmt:message>">
                                             <input type="number" name="time" min="0.5" max="12" step="0.5" required>
                                             <input type="text" name="uaId" value="${ua.id}" hidden>
@@ -72,7 +72,7 @@
                                 <td><span>${ua.duration}</span></td>
                                 <td>
                                     <a type="button" class="btn btn-outline-success btn-sm px-2"
-                                       href="${contextPath}/complete/${ua.id}">
+                                       href="${contextPath}/complete?id=${ua.id}">
                                         <fmt:message key="index.tab.current.table.content.complete.task">complete task</fmt:message>
                                     </a>
                                 </td>
