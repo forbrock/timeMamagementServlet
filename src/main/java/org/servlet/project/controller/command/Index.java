@@ -19,10 +19,10 @@ import static org.servlet.project.util.ViewResolver.resolve;
 
 public class Index implements Command {
     private static final Logger log = LogManager.getLogger(Index.class);
-    private UserService userService;
-    private UserActivityService userActivityService;
-    private SecurityService securityService;
-    private ActivityService activityService;
+    private final UserService userService;
+    private final UserActivityService userActivityService;
+    private final SecurityService securityService;
+    private final ActivityService activityService;
 
     public Index(UserService userService,
                  UserActivityService userActivityService,

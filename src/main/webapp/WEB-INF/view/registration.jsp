@@ -23,7 +23,7 @@
 <div class="container">
     <div><jsp:include page="fragments/lang.jsp"/></div>
 
-    <form class="form-signin" action="${contextPath}/register.do" method="post">
+    <form class="form-signin" action="${contextPath}/registration" method="post">
         <h2 class="form-signin-heading"><fmt:message key="reg.header">Create your account</fmt:message> </h2>
         <p>
             <input type="text"
@@ -31,7 +31,7 @@
                    class="form-control"
                    id="firstName"
                    value="${requestScope.first_name}"
-                   placeholder="<fmt:message key="reg.first.name">login</fmt:message>"
+                   placeholder="<fmt:message key="reg.first.name">first name</fmt:message>"
                    required autofocus>
             <c:if test="${requestScope.first_name_error != null}">
                 <div class="alert alert-danger" role="alert"><c:out value="${requestScope.first_name_error}"/></div>
@@ -49,6 +49,13 @@
                 <div class="alert alert-danger" role="alert"><c:out value="${requestScope.last_name_error}"/></div>
             </c:if>
         </p>
+        <c:if test="${requestScope.userAlreadyExistsMessage == true}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert"><fmt:message key="valid.login.email.not.unique"/>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </c:if>
         <p>
             <input type="text"
                    name="email"

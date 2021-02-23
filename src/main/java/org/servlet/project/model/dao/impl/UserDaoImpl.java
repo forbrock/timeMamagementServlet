@@ -9,6 +9,7 @@ import org.servlet.project.model.entity.User;
 import org.servlet.project.util.DBQueries;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +28,13 @@ public class UserDaoImpl implements UserDao {
         try (PreparedStatement ps = connection.prepareStatement(DBQueries.FIND_BY_ID_QUERY)){
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
-            return Optional.ofNullable(userMapper.extract(rs));
+            if (rs.next()) {
+                return Optional.ofNullable(userMapper.extract(rs));
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return Optional.empty();
     }
 
     @Override
@@ -38,12 +42,14 @@ public class UserDaoImpl implements UserDao {
         try (PreparedStatement statement = connection.prepareStatement(DBQueries.FIND_BY_USER_EMAIL_QUERY)) {
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
-
-            return Optional.ofNullable(userMapper.extract(rs));
+            if (rs.next()) {
+                return Optional.ofNullable(userMapper.extract(rs));
+            }
         } catch (SQLException e) {
             log.warn("User not found: {}", email);
             throw new RuntimeException(e);
         }
+        return Optional.empty();
     }
 
     @Override
@@ -56,7 +62,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(4, user.getPassword());
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException ex1) {
-            log.warn("Attempt to save existing user [email: {}", user.getEmail());
+            log.warn("Attempt to create existing user [email: {}]", user.getEmail());
             throw new UserAlreadyExistException("Such user already exists: " + user.getEmail());
         } catch (SQLException e) {
             log.error("ERROR: can't provide save operation!");
@@ -66,7 +72,18 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAll() {
-        return null;
+        try (PreparedStatement statement =
+                connection.prepareStatement(DBQueries.FIND_ALL_USERS,
+                        ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY)) {
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return userMapper.extractAll(rs);
+            }
+        } catch (SQLException e) {
+            log.error("ERROR [method findAll()]: can not provide operation!");
+        }
+        return new ArrayList<>();
     }
 
     @Override

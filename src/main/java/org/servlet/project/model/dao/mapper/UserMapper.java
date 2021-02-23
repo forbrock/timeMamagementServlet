@@ -3,11 +3,13 @@ package org.servlet.project.model.dao.mapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.servlet.project.exceptions.UserNotFoundException;
+import org.servlet.project.model.entity.Activity;
 import org.servlet.project.model.entity.Role;
 import org.servlet.project.model.entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserMapper implements ObjectMapper<User> {
@@ -18,9 +20,6 @@ public class UserMapper implements ObjectMapper<User> {
         User user = null;
 
         try {
-            if (!rs.next()) {
-                throw new UserNotFoundException("User not found");
-            }
             user = User.builder()
                     .id(rs.getLong("id"))
                     .firstName(rs.getString("first_name"))
@@ -38,6 +37,13 @@ public class UserMapper implements ObjectMapper<User> {
 
     @Override
     public List<User> extractAll(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException();
+        List<User> list = new ArrayList<>();
+        rs.beforeFirst();
+
+        while (rs.next()) {
+            User user = extract(rs);
+            list.add(user);
+        }
+        return list;
     }
 }

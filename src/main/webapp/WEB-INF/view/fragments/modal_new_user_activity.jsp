@@ -24,7 +24,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="${contextPath}/request_activity" method="post" id="create-activity">
+                    <form action="${contextPath}/request/activity" method="post" id="create-activity">
                         <div class="row">
                             <div class="col-5">
                                 <label for="activity" class="col-sm-2 col-form-label">

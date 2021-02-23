@@ -7,6 +7,7 @@ import org.servlet.project.model.service.SecurityService;
 import org.servlet.project.model.service.UserActivityService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
 import static org.servlet.project.util.ViewResolver.resolve;
@@ -25,6 +26,7 @@ public class RequestActivity implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String id = request.getParameter("activityId");
+        HttpSession session = request.getSession();
 
         if (Objects.isNull(id)) {
             return resolve("index");
@@ -36,11 +38,11 @@ public class RequestActivity implements Command {
         try {
             userActivityService.createRequest(userId, activityId);
         } catch (ActivityAlreadyExistException e) {
-            request.setAttribute("request_failure_message", true);
-            return resolve("index");
+            session.setAttribute("request_failure_message", true);
+            return "redirect:/index";
         }
-        request.setAttribute("request_success_message", true);
+        session.setAttribute("request_success_message", true);
         log.info("Activity requested successfully [user id: {}, activity id: {}]", userId, activityId);
-        return resolve("index");
+        return "redirect:/index";
     }
 }

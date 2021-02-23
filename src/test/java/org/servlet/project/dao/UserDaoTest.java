@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UserDaoImplTest {
+public class UserDaoTest {
     private static DaoFactory daoFactory;
     private static UserDao userDao;
 

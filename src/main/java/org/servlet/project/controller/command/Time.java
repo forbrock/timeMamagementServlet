@@ -30,7 +30,7 @@ public class Time implements Command {
         }
 
         timeLogService.addNewTimePoint(uaId, time);
-        log.info("New time point saved, id: {}, time: {}", uaId, time);
+        log.info("New time point saved [id: {}, time: {}]", uaId, time);
         return "redirect:/index";
     }
 }

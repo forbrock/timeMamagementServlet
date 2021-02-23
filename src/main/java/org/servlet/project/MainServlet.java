@@ -1,7 +1,5 @@
 package org.servlet.project;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.servlet.project.controller.command.*;
 import org.servlet.project.model.service.*;
 
@@ -17,7 +15,6 @@ import java.util.Map;
 import static org.servlet.project.util.ViewResolver.resolve;
 
 public class MainServlet extends HttpServlet {
-    private static final Logger log = LogManager.getLogger(MainServlet.class);
     private final Map<String, Command> commands = new HashMap<>();
 
     private final UserService userService = new UserService();
@@ -36,11 +33,13 @@ public class MainServlet extends HttpServlet {
         commands.put("/", indexCommand);
         commands.put("time", new Time(timeLogService));
         commands.put("complete", new CompleteActivity(userActivityService));
-        commands.put("request_activity", new RequestActivity(userActivityService, securityService));
+        commands.put("request/activity", new RequestActivity(userActivityService, securityService));
         commands.put("admin", new Admin(userActivityService));
         commands.put("report", new AdminReport(userActivityService));
         commands.put("admin/request/accept", new AdminAcceptActivity(userActivityService));
         commands.put("admin/request/decline", new RejectRequest(userActivityService));
+        commands.put("admin/users", new AdminUsers(userService));
+        commands.put("admin/user/create", new AdminCreateUser(userService));
     }
 
     private void processRequest(HttpServletRequest request,

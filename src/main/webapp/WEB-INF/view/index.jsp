@@ -94,12 +94,12 @@
                 </thead>
                 <tbody>
 <%--
-                        <div th:each="ua : ${userActivities}">
+                        <div>
                             <tr>
-                                <td><a th:text="${ua.getActivity().getCategory().getName()}">category</a></td>
-                                <td><a th:text="${ua.getActivity().getName()}">name</a></td>
-                                <td><a th:text="${ua.getState()}">accepted</a></td>
-                                <td><a th:text="$some buttons">actions</a></td>
+                                <td>category</td>
+                                <td>name</td>
+                                <td>accepted</td>
+                                <td>actions</td>
                             </tr>
                         </div>
 --%>
@@ -132,20 +132,22 @@
             </table>
         </div>
     </div>
-    <c:if test="${requestScope.request_success_message == true}">
-        <div class="alert alert-success alert" role="alert">
+    <c:if test="${sessionScope.request_success_message == true}">
+        <div class="alert alert-success" role="alert">
             <fmt:message key="valid.index.requested.activity.message.success"/>
-            <a href="${contextPath}/index">
-                <fmt:message key="valid.index.requested.activity.message.success.return">return</fmt:message>
-            </a>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <a href="<c:remove var='request_success_message' scope="session"/>"
+                   style="color: #6c757d; text-decoration: none"><span aria-hidden="true">&times;</span></a>
+            </button>
         </div>
     </c:if>
-    <c:if test="${requestScope.request_failure_message == true}">
-        <div class="alert alert-danger alert" role="alert">
+    <c:if test="${sessionScope.request_failure_message == true}">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <fmt:message key="valid.index.requested.activity.message.failure"/>
-            <a href="${contextPath}/index">
-                <fmt:message key="valid.index.requested.activity.message.failure.return">return</fmt:message>
-            </a>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <a href="<c:remove var='request_failure_message' scope="session"/>"
+                        style="color: #6c757d; text-decoration: none"><span aria-hidden="true">&times;</span></a>
+            </button>
         </div>
     </c:if>
 </div>
