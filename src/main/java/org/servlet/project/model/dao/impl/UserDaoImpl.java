@@ -2,15 +2,13 @@ package org.servlet.project.model.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.servlet.project.exceptions.UserAlreadyExistException;
 import org.servlet.project.model.dao.UserDao;
 import org.servlet.project.model.dao.mapper.UserMapper;
 import org.servlet.project.model.entity.User;
 import org.servlet.project.util.DBQueries;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,12 +47,25 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findAll() {
-        return null;
+    public User save(User user) {
+        try (PreparedStatement statement =
+                connection.prepareStatement(DBQueries.SAVE_USER_QUERY)) {
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getPassword());
+            statement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException ex1) {
+            log.warn("Attempt to save existing user [email: {}", user.getEmail());
+            throw new UserAlreadyExistException("Such user already exists: " + user.getEmail());
+        } catch (SQLException e) {
+            log.error("ERROR: can't provide save operation!");
+        }
+        return user;
     }
 
     @Override
-    public User save(User user) {
+    public List<User> findAll() {
         return null;
     }
 

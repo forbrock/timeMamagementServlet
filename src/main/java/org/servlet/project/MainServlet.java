@@ -31,7 +31,7 @@ public class MainServlet extends HttpServlet {
 
         commands.put("logout", new Logout());
         commands.put("login", new Login(userService, securityService));
-        commands.put("registration", new Registration());
+        commands.put("registration", new Registration(userService));
         commands.put("index", indexCommand);
         commands.put("/", indexCommand);
         commands.put("time", new Time(timeLogService));
