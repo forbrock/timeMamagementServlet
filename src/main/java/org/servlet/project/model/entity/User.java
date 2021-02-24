@@ -24,6 +24,10 @@ public class User {
         this.password = password;
     }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public Role getRole() {
         return role;
     }

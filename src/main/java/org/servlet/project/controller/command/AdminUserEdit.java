@@ -6,6 +6,7 @@ import org.servlet.project.model.service.UserService;
 import org.servlet.project.util.FormHelper;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 import static org.servlet.project.util.ViewResolver.resolveAdmin;
@@ -29,8 +30,10 @@ public class AdminUserEdit implements Command {
         }
 
         FormHelper.fillAdminUserEditForm(request, user.get().getFirstName(),
-                user.get().getLastName(), user.get().getEmail(), user.get().getRole().name());
+                user.get().getLastName(), user.get().getRole().name());
+
         request.setAttribute("roles", Role.values());
+        request.setAttribute("isEnabled", user.get().isEnabled());
         request.setAttribute("id", id);
 
         return resolveAdmin("admin_user_edit");

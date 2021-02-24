@@ -41,18 +41,20 @@ public class UserService {
                 .build());
     }
 
-    public User update(String id, String firstName, String lastName, String email,
-                       String password, String role) throws UserAlreadyExistException {
+    public User update(String id, String firstName, String lastName,
+                       String password, String role, String enabled) {
         User user = User.builder()
                 .id(Long.parseLong(id))
                 .firstName(firstName)
                 .lastName(lastName)
-                .email(email)
                 .role(Role.valueOf(role))
                 .build();
 
         if (!password.isEmpty()) {
             user.setPassword(securityService.encrypt(password));
+        }
+        if (!enabled.isEmpty()) {
+            user.setEnabled(Boolean.parseBoolean(enabled));
         }
         return userDao.update(user);
     }

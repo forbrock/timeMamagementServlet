@@ -11,6 +11,7 @@ import org.servlet.project.util.DBQueries;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
@@ -73,7 +74,40 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        return null;
+        if (Objects.isNull(user.getPassword()) || user.getPassword().isEmpty()) {
+            return updateNoPass(user);
+        }
+
+        try (PreparedStatement statement =
+                connection.prepareStatement(DBQueries.UPDATE_USER_QUERY)) {
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getPassword());
+            statement.setBoolean(4, user.isEnabled());
+            statement.setString(5, user.getRole().name());
+            statement.setLong(6, user.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            log.error("ERROR: can't provide save operation!", e);
+            return new User();
+        }
+        return user;
+    }
+
+    private User updateNoPass(User user) {
+        try (PreparedStatement statement =
+                     connection.prepareStatement(DBQueries.UPDATE_USER_SAME_PASSWORD_QUERY)) {
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setBoolean(3, user.isEnabled());
+            statement.setString(4, user.getRole().name());
+            statement.setLong(5, user.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            log.error("ERROR: can't provide save operation!", e);
+            return new User();
+        }
+        return user;
     }
 
     @Override

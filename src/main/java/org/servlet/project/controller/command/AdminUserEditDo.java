@@ -7,6 +7,7 @@ import org.servlet.project.model.service.UserService;
 import org.servlet.project.util.FormHelper;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 import static org.servlet.project.util.ViewResolver.resolveAdmin;
@@ -24,20 +25,14 @@ public class AdminUserEditDo implements Command {
         String id = request.getParameter("id");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String isEnabled = request.getParameter("isEnabled");
         String matchingPassword = request.getParameter("matchingPassword");
         String role = request.getParameter("role");
 
-        // TODO: check constraint validation
-        try {
-            userService.update(id, firstName, lastName, email, password, role);
-            throw new UserAlreadyExistException();
-        } catch (UserAlreadyExistException e) {
-            request.setAttribute("email_not_valid", "valid.login.email.not.unique");
-            FormHelper.fillAdminUserEditForm(request, firstName, lastName, email, role);
+        userService.update(id, firstName, lastName, password, role, isEnabled);
+        FormHelper.fillAdminUserEditForm(request, firstName, lastName, role);
 //            request.setAttribute("roles", Role.values());
-        }
         return "redirect:/admin/users";
     }
 }
