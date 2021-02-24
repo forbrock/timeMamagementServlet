@@ -73,7 +73,7 @@ public class UserActivityDaoImpl implements UserActivityDao {
     @Override
     public boolean delete(long id) {
         try (PreparedStatement statement =
-                connection.prepareStatement(DBQueries.DELETE_USER_ACTIVITY_BY_ID)) {
+                connection.prepareStatement(DBQueries.DELETE_USER_ACTIVITY_BY_ID_QUERY)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {

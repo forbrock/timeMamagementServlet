@@ -40,6 +40,8 @@ public class MainServlet extends HttpServlet {
         commands.put("admin/request/decline", new RejectRequest(userActivityService));
         commands.put("admin/users", new AdminUsers(userService));
         commands.put("admin/user/create", new AdminCreateUser(userService));
+        commands.put("admin/user/edit", new AdminUserEdit(userService));
+        commands.put("admin/user/edit.do", new AdminUserEditDo(userService));
     }
 
     private void processRequest(HttpServletRequest request,

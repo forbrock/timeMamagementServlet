@@ -28,18 +28,26 @@ public class Registration implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String matchingPassword = request.getParameter("matchingPassword");
+        String role = "USER";
 
         // TODO: check fields for null or empty
         // TODO: check that fields are filled correct
         // TODO: if filled wrong - pass words back
         // TODO: check that passwords are match
         try {
-            userService.createUser(firstName, lastName, email, password);
+            userService.create(firstName, lastName, email, password, role);
         } catch (UserAlreadyExistException e) {
             request.setAttribute("userAlreadyExistsMessage", true);
-            userService.getBackUserInput(request, firstName, lastName, email);
+            getBackUserInput(request, firstName, lastName, email);
             return resolve("registration");
         }
         return "redirect:/login";
+    }
+
+    private void getBackUserInput(HttpServletRequest request,
+                                 String firstName, String lastName, String email) {
+        request.setAttribute("first_name", firstName);
+        request.setAttribute("last_name", lastName);
+        request.setAttribute("email", email);
     }
 }

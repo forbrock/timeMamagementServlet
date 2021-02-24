@@ -1,14 +1,15 @@
 package org.servlet.project.controller.command;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.servlet.project.exceptions.UserAlreadyExistException;
 import org.servlet.project.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-
-import static org.servlet.project.util.ViewResolver.resolve;
-import static org.servlet.project.util.ViewResolver.resolveAdmin;
+import javax.servlet.http.HttpSession;
 
 public class AdminCreateUser implements Command {
+    private static final Logger log = LogManager.getLogger(AdminCreateUser.class);
     private final UserService userService;
 
     public AdminCreateUser(UserService userService) {
@@ -17,6 +18,7 @@ public class AdminCreateUser implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
+        HttpSession session = request.getSession();
         // TODO: check fields for null or empty
         // TODO: check that fields are filled correct
         // TODO: if filled wrong - pass words back
@@ -26,14 +28,18 @@ public class AdminCreateUser implements Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String matchingPassword = request.getParameter("matchingPassword");
+        String role = request.getParameter("role");
 
         try {
-            userService.createUser(firstName, lastName, email, password);
+            userService.create(firstName, lastName, email, password, role);
         } catch (UserAlreadyExistException e) {
-            request.setAttribute("userAlreadyExistsMessage", true);
-            userService.getBackUserInput(request, firstName, lastName, email);
-            return resolveAdmin("admin_users");
+            session.setAttribute("userAlreadyExistsMessage", true);
+            return "redirect:/admin/users";
         }
-        return resolveAdmin("admin_users");
+        session.setAttribute("userCreatedMessage", true);
+        if ("ADMIN".equals(role)) {
+            log.info("User with ADMIN rights created [email: {}]", email);
+        }
+        return "redirect:/admin/users";
     }
 }

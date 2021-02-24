@@ -60,6 +60,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
+            statement.setString(5, user.getRole().name());
             statement.executeUpdate();
         } catch (SQLIntegrityConstraintViolationException ex1) {
             log.warn("Attempt to create existing user [email: {}]", user.getEmail());
@@ -71,9 +72,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User update(User user) {
+        return null;
+    }
+
+    @Override
     public List<User> findAll() {
         try (PreparedStatement statement =
-                connection.prepareStatement(DBQueries.FIND_ALL_USERS,
+                connection.prepareStatement(DBQueries.FIND_ALL_USERS_QUERY,
                         ResultSet.TYPE_SCROLL_INSENSITIVE,
                         ResultSet.CONCUR_READ_ONLY)) {
             ResultSet rs = statement.executeQuery();
@@ -84,11 +90,6 @@ public class UserDaoImpl implements UserDao {
             log.error("ERROR [method findAll()]: can not provide operation!");
         }
         return new ArrayList<>();
-    }
-
-    @Override
-    public User update(User user) {
-        return null;
     }
 
     @Override

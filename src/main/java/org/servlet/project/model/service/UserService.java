@@ -6,8 +6,8 @@ import org.servlet.project.model.dao.impl.DaoFactory;
 import org.servlet.project.model.entity.Role;
 import org.servlet.project.model.entity.User;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class UserService {
@@ -18,27 +18,42 @@ public class UserService {
         return userDao.findByEmail(email);
     }
 
-    public User createUser(String firstName,
-                           String lastName,
-                           String email,
-                           String password) throws UserAlreadyExistException {
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
+
+    public Optional<User> findById(long id) {
+        return userDao.findById(id);
+    }
+
+    public User create(String firstName,
+                       String lastName,
+                       String email,
+                       String password,
+                       String role) throws UserAlreadyExistException {
         String encodedPassword = securityService.encrypt(password);
         return userDao.save(User.builder()
                 .firstName(firstName)
                 .lastName(lastName)
                 .email(email)
                 .password(encodedPassword)
+                .role(Role.valueOf(role))
                 .build());
     }
 
-    public List<User> findAll() {
-        return userDao.findAll();
-    }
+    public User update(String id, String firstName, String lastName, String email,
+                       String password, String role) throws UserAlreadyExistException {
+        User user = User.builder()
+                .id(Long.parseLong(id))
+                .firstName(firstName)
+                .lastName(lastName)
+                .email(email)
+                .role(Role.valueOf(role))
+                .build();
 
-    public void getBackUserInput(HttpServletRequest request,
-                                 String firstName, String lastName, String email) {
-        request.setAttribute("first_name", firstName);
-        request.setAttribute("last_name", lastName);
-        request.setAttribute("email", email);
+        if (!password.isEmpty()) {
+            user.setPassword(securityService.encrypt(password));
+        }
+        return userDao.update(user);
     }
 }

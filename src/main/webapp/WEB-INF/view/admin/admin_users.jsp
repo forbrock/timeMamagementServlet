@@ -42,11 +42,14 @@
                     <c:if test="${user.enabled == false}"><fmt:message key="admin.users.table.state.disabled"/></c:if>
                   </td>
                   <td>
-                    <a class="m-2" href="${contextPath}/admin/user/edit?id=${user.id}">
-                      <fmt:message key="admin.users.table.button.edit">edit</fmt:message> </a>
-                    <a href="${contextPath}/admin/user/delete?id=${user.id}">
+                    <a type="button" class="btn btn-outline-warning btn-sm px-2"
+                       href="${contextPath}/admin/user/edit?id=${user.id}">
+                      <fmt:message key="admin.users.table.button.edit">edit</fmt:message></a>
+                    <a type="button" class="btn btn-outline-danger btn-sm px-2"
+                       href="${contextPath}/admin/user/delete?id=${user.id}">
                       <fmt:message key="admin.users.table.button.delete">delete</fmt:message></a>
-                    <a href="${contextPath}/admin/user/activities?id=${user.id}">
+                    <a type="button" class="btn btn-outline-primary btn-sm px-2"
+                       href="${contextPath}/admin/user/activities?id=${user.id}">
                       <fmt:message key="admin.users.table.button.view">view activities</fmt:message></a>
                   </td>
                 </tr>
@@ -55,6 +58,24 @@
           </table>
         </div>
         <c:import url="/WEB-INF/view/fragments/modal_new_user.jsp"/>
+        <c:if test="${sessionScope.userCreatedMessage == true}">
+          <div class="alert alert-success" role="alert">
+            <fmt:message key="valid.admin.user.create.success"/>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <a href="<c:remove var='userCreatedMessage' scope="session"/>"
+                 style="color: #6c757d; text-decoration: none"><span aria-hidden="true">&times;</span></a>
+            </button>
+          </div>
+        </c:if>
+        <c:if test="${sessionScope.userAlreadyExistsMessage == true}">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <fmt:message key="valid.admin.user.create.failure"/>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <a href="<c:remove var='userAlreadyExistsMessage' scope="session"/>"
+                 style="color: #6c757d; text-decoration: none"><span aria-hidden="true">&times;</span></a>
+            </button>
+          </div>
+        </c:if>
       </main>
     </div>
   </div>
