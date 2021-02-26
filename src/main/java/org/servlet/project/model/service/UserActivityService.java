@@ -37,7 +37,7 @@ public class UserActivityService {
         return uaDao.updateActivityState(ActivityState.ACCEPTED, id);
     }
 
-    public boolean rejectRequest(long id) {
+    public boolean delete(long id) {
         return uaDao.delete(id);
     }
 }

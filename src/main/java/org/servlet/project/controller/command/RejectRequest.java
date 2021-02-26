@@ -21,7 +21,7 @@ public class RejectRequest implements Command {
         }
 
         long activityId = Long.parseLong(id);
-        userActivityService.rejectRequest(activityId);
+        userActivityService.delete(activityId);
         return "redirect:/admin";
     }
 }

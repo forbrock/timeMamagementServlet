@@ -28,7 +28,7 @@ public class Category {
         return new CategoryBuilder();
     }
 
-    private static class CategoryBuilder {
+    public static class CategoryBuilder {
         private long id;
         private String name;
 

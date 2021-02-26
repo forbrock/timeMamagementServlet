@@ -22,4 +22,16 @@
         /* And disable the pointer events */
         pointer-events: none;
     }
+    a svg:hover #edit {
+        fill: #a17602;
+    }
+    a svg:hover #delete {
+        fill: #ff0000;
+    }
+    a svg:hover #view {
+        fill: #187dc9;
+    }
+    a svg:hover #accept {
+        fill: #04c70e;
+    }
 </style>

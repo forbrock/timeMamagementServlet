@@ -38,7 +38,6 @@ public class Index implements Command {
         HttpSession session = request.getSession();
         User user = securityService.getLoggedUser(session);
 
-        // TODO: move validation to secure filter
         if (Objects.isNull(user)) {
             log.warn("Index controller: User not found, redirect to login page");
             session.invalidate();

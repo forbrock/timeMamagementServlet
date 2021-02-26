@@ -27,27 +27,32 @@
                     <div class="row">
                         <div class="col-10">
                             <div class="form-group form-inline">
-                                <label for="firstName" class="col-5 px-0 justify-content-start">First name</label>
+                                <label for="firstName" class="col-5 px-0 justify-content-start">
+                                    <fmt:message key="modal.new.user.label.first.name">first name</fmt:message></label>
                                 <input type="text" class="form-control mb-1" id="firstName" name="firstName"
                                        placeholder="<fmt:message key='modal.new.user.placeholder.first.name'/>">
                             </div>
                             <div class="form-group form-inline">
-                                <label for="lastName" class="col-5 px-0 justify-content-start">Last name</label>
+                                <label for="lastName" class="col-5 px-0 justify-content-start">
+                                    <fmt:message key="modal.new.user.label.last.name">last name</fmt:message></label>
                                 <input type="text" class="form-control mb-1" id="lastName" name="lastName"
                                        placeholder="<fmt:message key='modal.new.user.placeholder.last.name'/>">
                             </div>
                             <div class="form-group form-inline">
-                                <label for="email" class="col-5 px-0 justify-content-start">Email</label>
+                                <label for="email" class="col-5 px-0 justify-content-start">
+                                    <fmt:message key="modal.new.user.label.email">email</fmt:message></label>
                                 <input type="email" class="form-control mb-1" id="email" name="email"
                                        placeholder="<fmt:message key='modal.new.user.placeholder.email'/>">
                             </div>
                             <div class="form-group form-inline">
-                                <label for="password" class="col-5 px-0 justify-content-start">Password</label>
+                                <label for="password" class="col-5 px-0 justify-content-start">
+                                    <fmt:message key="modal.new.user.label.password">password</fmt:message></label>
                                 <input type="password" class="form-control mb-1" id="password" name="password"
                                        placeholder="<fmt:message key='modal.new.user.placeholder.password'/>">
                             </div>
                             <div class="form-group form-inline">
-                                <label for="matchingPassword" class="col-5 px-0 justify-content-start">Confirm password</label>
+                                <label for="matchingPassword" class="col-5 px-0 justify-content-start">
+                                    <fmt:message key="modal.new.user.label.confirm.password">confirm password</fmt:message></label>
                                 <input type="password" class="form-control mb-1" id="matchingPassword" name="matchingPassword"
                                        placeholder="<fmt:message key='modal.new.user.placeholder.password.confirm'/>">
                             </div>

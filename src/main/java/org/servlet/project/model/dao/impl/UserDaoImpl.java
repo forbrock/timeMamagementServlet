@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
                 return Optional.ofNullable(userMapper.extract(rs));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            log.warn("ERROR: can't provide user findById operation!", e);
         }
         return Optional.empty();
     }
@@ -47,10 +47,25 @@ public class UserDaoImpl implements UserDao {
                 return Optional.ofNullable(userMapper.extract(rs));
             }
         } catch (SQLException e) {
-            log.warn("User not found: {}", email);
-            throw new RuntimeException(e);
+            log.warn("ERROR: can't provide user findByEmail operation!", e);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public boolean deleteById(long id) {
+        try (PreparedStatement statement =
+                connection.prepareStatement(DBQueries.DELETE_USER_BY_ID)) {
+            statement.setLong(1, id);
+            boolean isDeleted = statement.executeUpdate() > 0;
+            if (isDeleted) {
+                log.info("Deleted user id: {}", id);
+                return true;
+            }
+        } catch (SQLException e) {
+            log.error("ERROR: can't provide user delete operation!", e);
+        }
+        return false;
     }
 
     @Override
@@ -67,7 +82,8 @@ public class UserDaoImpl implements UserDao {
             log.warn("Attempt to create existing user [email: {}]", user.getEmail());
             throw new UserAlreadyExistException("Such user already exists: " + user.getEmail());
         } catch (SQLException e) {
-            log.error("ERROR: can't provide save operation!");
+            log.error("ERROR: can't provide user save operation!", e);
+            return new User();
         }
         return user;
     }
@@ -88,7 +104,7 @@ public class UserDaoImpl implements UserDao {
             statement.setLong(6, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            log.error("ERROR: can't provide save operation!", e);
+            log.error("ERROR: can't provide user update operation!", e);
             return new User();
         }
         return user;
@@ -104,7 +120,7 @@ public class UserDaoImpl implements UserDao {
             statement.setLong(5, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            log.error("ERROR: can't provide save operation!", e);
+            log.error("ERROR: can't provide user update operation!", e);
             return new User();
         }
         return user;
@@ -121,7 +137,7 @@ public class UserDaoImpl implements UserDao {
                 return userMapper.extractAll(rs);
             }
         } catch (SQLException e) {
-            log.error("ERROR [method findAll()]: can not provide operation!");
+            log.error("ERROR: can't provide user findAll operation!", e);
         }
         return new ArrayList<>();
     }

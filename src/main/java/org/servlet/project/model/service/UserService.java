@@ -58,4 +58,8 @@ public class UserService {
         }
         return userDao.update(user);
     }
+
+    public boolean delete(long id) {
+        return userDao.deleteById(id);
+    }
 }

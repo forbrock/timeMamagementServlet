@@ -22,6 +22,7 @@ public class MainServlet extends HttpServlet {
     private final SecurityService securityService = new SecurityService();
     private final TimeLogService timeLogService = new TimeLogService();
     private final ActivityService activityService = new ActivityService();
+    private final CategoryService categoryService = new CategoryService();
 
     public void init(ServletConfig servletConfig) {
         Index indexCommand = new Index(userService, userActivityService, securityService, activityService);
@@ -42,6 +43,9 @@ public class MainServlet extends HttpServlet {
         commands.put("admin/user/create", new AdminCreateUser(userService));
         commands.put("admin/user/edit", new AdminUserEdit(userService));
         commands.put("admin/user/edit.do", new AdminUserEditDo(userService));
+        commands.put("admin/user/delete", new AdminUserDelete(userService));
+        commands.put("admin/user/activities", new AdminUserActivities(userActivityService));
+        commands.put("admin/categories", new AdminCategories(categoryService));
     }
 
     private void processRequest(HttpServletRequest request,

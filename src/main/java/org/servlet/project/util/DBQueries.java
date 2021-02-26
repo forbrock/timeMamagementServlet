@@ -45,7 +45,9 @@ public class DBQueries {
     public static final String SAVE_USER_ACTIVITY_QUERY = "INSERT INTO users_activities (user_id, activity_id, state) VALUES (?, ?, ?)";
     public static final String DELETE_USER_ACTIVITY_BY_ID_QUERY = "DELETE FROM users_activities WHERE id = ?";
     public static final String SAVE_USER_QUERY = "INSERT INTO users (first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, ?)";
+    public static final String DELETE_USER_BY_ID = "DELETE FROM users WHERE id = ?";
     public static final String FIND_ALL_USERS_QUERY = "SELECT * FROM users";
     public static final String UPDATE_USER_QUERY = "UPDATE users SET first_name = ?, last_name = ?, password = ?, enabled = ?, role = ? WHERE id = ?";
     public static final String UPDATE_USER_SAME_PASSWORD_QUERY = "UPDATE users SET first_name = ?, last_name = ?, enabled = ?, role = ? WHERE id = ?";
+    public static final String FIND_ALL_CATEGORIES_QUERY = "SELECT * FROM categories";
 }

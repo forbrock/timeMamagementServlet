@@ -25,27 +25,4 @@
     <exception-type>java.lang.Exception</exception-type>
     <location>/WEB-INF/view/error.jsp</location>
   </error-page>
-<!--==========================================================
-    MIME TYPES
-==========================================================-->
-  <mime-mapping>
-    <extension>js</extension>
-    <mime-type>application/javascript</mime-type>
-  </mime-mapping>
-  <mime-mapping>
-    <extension>css</extension>
-    <mime-type>text/css</mime-type>
-  </mime-mapping>
-  <mime-mapping>
-    <extension>jpg</extension>
-    <mime-type>image/jpeg</mime-type>
-  </mime-mapping>
-  <mime-mapping>
-    <extension>png</extension>
-    <mime-type>image/png</mime-type>
-  </mime-mapping>
-  <mime-mapping>
-    <extension>svg</extension>
-    <mime-type>image/svg+xml</mime-type>
-  </mime-mapping>
 </web-app>

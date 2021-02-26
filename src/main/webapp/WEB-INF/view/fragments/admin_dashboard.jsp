@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="${contextPath}/categories">
+                <a class="nav-link" href="${contextPath}/admin/categories">
                     <fmt:message key="admin.dashboard.categories">Categories</fmt:message>
                 </a>
             </li>
