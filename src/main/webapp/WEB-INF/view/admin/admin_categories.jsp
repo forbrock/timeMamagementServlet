@@ -58,6 +58,17 @@
           </table>
         </div>
         <c:import url="/WEB-INF/view/fragments/modal_new_category.jsp"/>
+
+        <c:if test="${sessionScope.category_error_message != null}">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <fmt:message key="${sessionScope.category_error_message}"/>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <a href="<c:remove var='category_error_message' scope="session"/>"
+                 style="color: #6c757d; text-decoration: none"><span aria-hidden="true">&times;</span></a>
+            </button>
+          </div>
+        </c:if>
+
       </main>
     </div>
   </div>

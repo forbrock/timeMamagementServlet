@@ -36,7 +36,7 @@ public class MainServlet extends HttpServlet {
         commands.put("complete", new CompleteActivity(userActivityService));
         commands.put("request/activity", new RequestActivity(userActivityService, securityService));
         commands.put("admin", new Admin(userActivityService));
-        commands.put("report", new AdminReport(userActivityService));
+        commands.put("admin/report", new AdminReport(userActivityService));
         commands.put("admin/request/accept", new AdminAcceptActivity(userActivityService));
         commands.put("admin/request/decline", new RejectRequest(userActivityService));
         commands.put("admin/users", new AdminUsers(userService));
@@ -46,6 +46,12 @@ public class MainServlet extends HttpServlet {
         commands.put("admin/user/delete", new AdminUserDelete(userService));
         commands.put("admin/user/activities", new AdminUserActivities(userActivityService));
         commands.put("admin/categories", new AdminCategories(categoryService));
+        commands.put("admin/category/edit", new AdminCategoryEdit(categoryService));
+        commands.put("admin/category/create", new AdminCreateCategory(categoryService));
+        commands.put("admin/category/delete", new AdminCategoryDelete(categoryService));
+        commands.put("admin/activities", new AdminActivities(activityService, categoryService));
+        commands.put("admin/activity/edit", new AdminActivityEdit(activityService, categoryService));
+        commands.put("admin/activity/create", new AdminCreateActivity(activityService));
     }
 
     private void processRequest(HttpServletRequest request,

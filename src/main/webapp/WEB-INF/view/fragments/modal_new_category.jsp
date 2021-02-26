@@ -27,9 +27,9 @@
                     <div class="row">
                         <div class="col-10">
                             <div class="form-group form-inline">
-                                <label for="category" class="col-5 px-0 justify-content-start">
+                                <label for="name" class="col-5 px-0 justify-content-start">
                                     <fmt:message key="modal.new.category.label">category</fmt:message></label>
-                                <input type="text" class="form-control mb-1" id="category" name="category"
+                                <input type="text" class="form-control mb-1" id="name" name="name"
                                        placeholder="<fmt:message key='modal.new.category.placeholder.name'/>">
                             </div>
                         </div>

@@ -26,12 +26,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="${contextPath}/activities">
+                <a class="nav-link" href="${contextPath}/admin/activities">
                     <fmt:message key="admin.dashboard.activities">Activities</fmt:message>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${contextPath}/report">
+                <a class="nav-link" href="${contextPath}/admin/report">
                     <fmt:message key="admin.dashboard.report">Report</fmt:message>
                 </a>
             </li>

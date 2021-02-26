@@ -4,13 +4,14 @@ import java.util.Objects;
 
 public class Activity {
     private long id;
+    private long categoryId;
     private String name;
 
-    public Activity(String name) {
-        this.name = name;
-    }
-
     public Activity() {}
+
+    public long getCategoryId() {
+        return categoryId;
+    }
 
     public long getId() {
         return id;
@@ -26,16 +27,18 @@ public class Activity {
         if (o == null || getClass() != o.getClass()) return false;
         Activity activity = (Activity) o;
         return id == activity.id &&
+                categoryId == activity.categoryId &&
                 name.equals(activity.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, categoryId, name);
     }
 
     private Activity(ActivityBuilder builder) {
         this.id = builder.id;
+        this.categoryId = builder.categoryId;
         this.name = builder.name;
     }
 
@@ -45,10 +48,16 @@ public class Activity {
 
     public static class ActivityBuilder {
         private long id;
+        private long categoryId;
         private String name;
 
         public ActivityBuilder id(long id) {
             this.id = id;
+            return this;
+        }
+
+        public ActivityBuilder categoryId(long id) {
+            categoryId = id;
             return this;
         }
 

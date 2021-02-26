@@ -2,15 +2,15 @@ package org.servlet.project.model.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.servlet.project.exceptions.ActivityAlreadyExistException;
+import org.servlet.project.exceptions.CategoryAlreadyExistException;
 import org.servlet.project.model.dao.ActivityDao;
 import org.servlet.project.model.dao.mapper.ActivityMapper;
 import org.servlet.project.model.entity.Activity;
+import org.servlet.project.model.entity.Category;
 import org.servlet.project.util.DBQueries;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,18 +39,55 @@ public class ActivityDaoImpl implements ActivityDao {
     }
 
     @Override
+    public Activity update(Activity activity) {
+        try (PreparedStatement statement =
+                     connection.prepareStatement(DBQueries.UPDATE_ACTIVITY_QUERY)) {
+            statement.setString(1, activity.getName());
+            statement.setLong(2, activity.getId());
+            boolean isUpdated = statement.executeUpdate() > 0;
+            if (isUpdated) {
+                return activity;
+            }
+        } catch (SQLIntegrityConstraintViolationException ex1) {
+            throw new ActivityAlreadyExistException();
+        } catch (SQLException ex2) {
+            log.error("Can not provide activity update operation", ex2);
+        }
+        return new Activity();
+    }
+
+    @Override
     public Optional<Activity> findById(long id) {
+        try (PreparedStatement statement =
+                connection.prepareStatement(DBQueries.FIND_ACTIVITY_BY_ID_QUERY)) {
+            statement.setLong(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return Optional.ofNullable(activityMapper.extract(rs));
+            }
+        } catch (SQLException e) {
+            log.error("Can not provide activity findById operation", e);
+        }
         return Optional.empty();
     }
 
     @Override
     public Activity save(Activity activity) {
-        return null;
-    }
-
-    @Override
-    public Activity update(Activity activity) {
-        return null;
+        try (PreparedStatement statement =
+                     connection.prepareStatement(DBQueries.SAVE_ACTIVITY_QUERY)) {
+            statement.setString(1, activity.getName());
+            statement.setLong(2, activity.getCategoryId());
+            boolean saved = statement.executeUpdate() > 0;
+            if (saved) {
+                return activity;
+            }
+        } catch (SQLIntegrityConstraintViolationException ex1) {
+            log.info("Attempt to create an existing activity: {}", activity.getName());
+            throw new ActivityAlreadyExistException();
+        } catch (SQLException ex2) {
+            log.error("Can not provide activity save operation", ex2);
+        }
+        return new Activity();
     }
 
     @Override

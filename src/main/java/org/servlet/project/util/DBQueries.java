@@ -50,4 +50,11 @@ public class DBQueries {
     public static final String UPDATE_USER_QUERY = "UPDATE users SET first_name = ?, last_name = ?, password = ?, enabled = ?, role = ? WHERE id = ?";
     public static final String UPDATE_USER_SAME_PASSWORD_QUERY = "UPDATE users SET first_name = ?, last_name = ?, enabled = ?, role = ? WHERE id = ?";
     public static final String FIND_ALL_CATEGORIES_QUERY = "SELECT * FROM categories";
+    public static final String UPDATE_CATEGORY_QUERY = "UPDATE categories SET name = ? WHERE id = ?";
+    public static final String FIND_CATEGORY_BY_ID_QUERY = "SELECT * FROM categories WHERE id = ?";
+    public static final String SAVE_CATEGORY_QUERY = "INSERT INTO categories (name) VALUES (?)";
+    public static final String DELETE_CATEGORY_BY_ID_QUERY = "DELETE FROM categories WHERE id = ?";
+    public static final String UPDATE_ACTIVITY_QUERY = "UPDATE activities SET name = ? WHERE id = ?";
+    public static final String FIND_ACTIVITY_BY_ID_QUERY = "SELECT * FROM activities WHERE id = ?";
+    public static final String SAVE_ACTIVITY_QUERY = "INSERT INTO activities (name, category_id) VALUES (?, ?)";
 }
