@@ -77,4 +77,4 @@ values ('admin', 'admin', 'admin@mail.com', '$2a$12$derrv5ZsI/D4OH6wPPe5QejMab0z
        ('user2', 'user2', 'user2@mail.com', '$2a$12$7dBd/i.SAQv/6jK7QIgduugMZmUCkmabc/QLImNk/Npo4ivOrKOFi', 'USER');
 	   
 insert into users_activities (user_id, activity_id)
-values (2, 2), (2, 3), (4, 6), (4, 7);
+values (2, 2), (2, 3), (3, 6), (3, 7);
