@@ -66,13 +66,12 @@ public class User {
                 firstName.equals(user.firstName) &&
                 lastName.equals(user.lastName) &&
                 email.equals(user.email) &&
-                password.equals(user.password) &&
                 role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, password, enabled, role);
+        return Objects.hash(id, firstName, lastName, email, enabled, role);
     }
 
     private User(UserBuilder builder) {

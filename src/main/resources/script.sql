@@ -1,3 +1,5 @@
+create database db_time_management;
+
 create table if not exists users
 (
     id         int primary key                       not null auto_increment,
@@ -77,4 +79,29 @@ values ('admin', 'admin', 'admin@mail.com', '$2a$12$derrv5ZsI/D4OH6wPPe5QejMab0z
        ('user2', 'user2', 'user2@mail.com', '$2a$12$7dBd/i.SAQv/6jK7QIgduugMZmUCkmabc/QLImNk/Npo4ivOrKOFi', 'USER');
 	   
 insert into users_activities (user_id, activity_id, state)
-values (2, 2, 'ACCEPTED'), (2, 3, 'ACCEPTED'), (3, 6, 'ACCEPTED'), (3, 7, 'ACCEPTED');
+values (2, 1, 'COMPLETED'),
+       (2, 6, 'COMPLETED'),
+       (2, 1, 'ACCEPTED'),
+       (2, 2, 'ACCEPTED'),
+       (3, 3, 'COMPLETED'),
+       (3, 7, 'COMPLETED'),
+       (3, 3, 'ACCEPTED'),
+       (3, 7, 'REQUESTED');
+
+insert into time_log (duration, user_activity_id, start_date)
+values (5, 1, '2021-02-27 13:07:03'),
+       (10, 2, '2021-02-27 13:07:10'),
+       (12, 2, '2021-02-27 13:07:13'),
+       (8, 2, '2021-02-27 13:07:20'),
+       (12, 2, '2021-02-27 13:07:30'),
+       (4, 2, '2021-02-27 13:07:34'),
+       (0.5, 2, '2021-02-27 13:07:38'),
+       (0.5, 2, '2021-02-27 13:07:40'),
+       (9, 1, '2021-02-27 13:08:08'),
+       (3, 3, '2021-02-27 13:08:33'),
+       (0.5, 4, '2021-02-27 13:08:38'),
+       (3, 5, '2021-02-27 13:10:18'),
+       (0.5, 5, '2021-02-27 13:10:19'),
+       (0.5, 6, '2021-02-27 13:10:19'),
+       (1, 7, '2021-02-27 13:10:50'),
+       (3.5, 8, '2021-02-27 13:11:42');

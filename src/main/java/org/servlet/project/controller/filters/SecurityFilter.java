@@ -1,5 +1,7 @@
 package org.servlet.project.controller.filters;
 
+import org.servlet.project.model.entity.User;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @WebFilter("/*")
 public class SecurityFilter implements Filter {
@@ -30,7 +33,7 @@ public class SecurityFilter implements Filter {
             return;
         }
 
-        if (isAuthenticated(request)) {
+        if (isAuthenticated(request) && isActive(request)) {
             chain.doFilter(request, response);
             return;
         }
@@ -40,6 +43,14 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void destroy() {
+    }
+
+    private boolean isActive(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("loggedUser");
+        if (Objects.isNull(user)) {
+            return false;
+        }
+        return user.isEnabled();
     }
 
     private boolean isAuthenticated(HttpServletRequest request) {
