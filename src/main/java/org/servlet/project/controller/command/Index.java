@@ -39,7 +39,7 @@ public class Index implements Command {
         User user = securityService.getLoggedUser(session);
 
         if (Objects.isNull(user)) {
-            log.warn("Index controller: User not found, redirect to login page");
+            log.debug("Index controller: User not found, redirect to login page");
             session.invalidate();
             return "redirect:/login";
         }

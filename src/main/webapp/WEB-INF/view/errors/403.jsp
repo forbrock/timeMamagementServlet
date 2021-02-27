@@ -1,6 +1,9 @@
-<%@ page language="java" isErrorPage="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="mft" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="property/messages"/>
 
 <html>
 <head>
@@ -13,10 +16,8 @@
     <div class="error-body">
         <h3><mft:message key="error.page.common.message">something went wrong!</mft:message></h3>
         <h1>403</h1>
-        <p style="font-size: 22px;"><mft:message key="valid.access.restricted">forbidden</mft:message></p>
-        <p><c:out value="${requestScope['javax.servlet.error.request_uri']}">url</c:out></p>
-        <a href="${pageContext}/"><mft:message key="error.page.back.home">back to Home Page</mft:message></a>
-        <%= exception %>
+        <p style="font-size: 22px;"><fmt:message key="valid.access.restricted">forbidden</fmt:message></p>
+        <a href="${pageContext}/"><fmt:message key="error.page.back.home">back to Home Page</fmt:message></a>
     </div>
 </div>
 </body>

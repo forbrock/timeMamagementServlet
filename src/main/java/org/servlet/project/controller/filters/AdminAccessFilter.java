@@ -33,7 +33,7 @@ public class AdminAccessFilter implements Filter {
 
         try {
             if (Objects.isNull(user) || (user.getRole() != Role.ADMIN)) {
-                response.sendRedirect("/WEB-INF/view/errors/403.jsp");
+                request.getRequestDispatcher("/WEB-INF/view/errors/403.jsp").forward(request, response);
                 return;
             }
             chain.doFilter(req, res);
