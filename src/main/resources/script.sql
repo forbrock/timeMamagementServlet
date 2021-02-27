@@ -76,5 +76,5 @@ values ('admin', 'admin', 'admin@mail.com', '$2a$12$derrv5ZsI/D4OH6wPPe5QejMab0z
        ('user1', 'user1', 'user1@mail.com', '$2a$12$7oBIQ6X27bQ10AvY5T./9uBelzd0j1Nie6USYBXLXKn1ElpqKZ2cm', 'USER'),
        ('user2', 'user2', 'user2@mail.com', '$2a$12$7dBd/i.SAQv/6jK7QIgduugMZmUCkmabc/QLImNk/Npo4ivOrKOFi', 'USER');
 	   
-insert into users_activities (user_id, activity_id)
-values (2, 2), (2, 3), (3, 6), (3, 7);
+insert into users_activities (user_id, activity_id, state)
+values (2, 2, 'ACCEPTED'), (2, 3, 'ACCEPTED'), (3, 6, 'ACCEPTED'), (3, 7, 'ACCEPTED');
