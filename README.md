@@ -14,15 +14,17 @@ Administrator manages:
 - activities;
 - confirms (assign) an activity to the user.
 
-Administrator can view list of activities as well, make sorting:
-- by name;
-- by category;
-- by number of users.
-Can do filtering by category of activities. 
-View a report about all users, number of activities and the time marked by the user.
-User must have a page. User can have one or multiple of activities.
-The user notes the amount of time used for each activity.
-The user can send a request to add/remove an activity.
+Administrator can: 
+- view list of activities;
+- make sorting: by name, category, by number of users;
+- can do filtering by a category of activities;
+- view a report about all users, number of activities, and the time marked by the user.
+
+User: 
+- must have a page; 
+- can have one or multiple of activities;
+- notes the amount of time used for each activity.
+- can send a request to add/remove an activity.
 
 ### Requirements
     • JDK 11 or higher

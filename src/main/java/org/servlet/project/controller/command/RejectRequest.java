@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class RejectRequest implements Command {
     private final UserActivityService userActivityService;
+    public static final String REDIRECT_TO_ADMIN = "redirect:/admin";
 
     public RejectRequest(UserActivityService userActivityService) {
         this.userActivityService = userActivityService;
@@ -17,11 +18,11 @@ public class RejectRequest implements Command {
         String id = request.getParameter("id");
 
         if (Objects.isNull(id)) {
-            return "redirect:/admin";
+            return REDIRECT_TO_ADMIN;
         }
 
         long activityId = Long.parseLong(id);
         userActivityService.delete(activityId);
-        return "redirect:/admin";
+        return REDIRECT_TO_ADMIN;
     }
 }

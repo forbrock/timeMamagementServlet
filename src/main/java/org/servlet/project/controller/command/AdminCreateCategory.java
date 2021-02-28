@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class AdminCreateCategory implements Command {
     private final CategoryService categoryService;
+    public static final String REDIRECT_TO_ADMIN_CATEGORIES = "redirect:/admin/categories";
 
     public AdminCreateCategory(CategoryService categoryService) {
         this.categoryService = categoryService;
@@ -19,7 +20,7 @@ public class AdminCreateCategory implements Command {
         if (Objects.isNull(name) || name.isEmpty()) {
             request.getSession().setAttribute(
                     "category_error_message", "valid.admin.new.category.empty");
-            return "redirect:/admin/categories";
+            return REDIRECT_TO_ADMIN_CATEGORIES;
         }
         try {
             categoryService.create(name);
@@ -27,6 +28,6 @@ public class AdminCreateCategory implements Command {
             request.getSession().setAttribute(
                     "category_error_message", "valid.admin.new.category.exists");
         }
-        return "redirect:/admin/categories";
+        return REDIRECT_TO_ADMIN_CATEGORIES;
     }
 }

@@ -10,4 +10,11 @@ public class FormHelper {
         request.setAttribute("lastName", lastName);
         request.setAttribute("role", role);
     }
+
+    public static void fillUserCreationForm(HttpServletRequest request,
+                                      String firstName, String lastName, String email) {
+        request.setAttribute("first_name", firstName);
+        request.setAttribute("last_name", lastName);
+        request.setAttribute("email", email);
+    }
 }

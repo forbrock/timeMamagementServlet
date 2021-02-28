@@ -25,11 +25,8 @@
 
     <form class="form-signin" method="post" action="${contextPath}/login">
         <h2 class="form-signin-heading"><fmt:message key="login.header">sign in</fmt:message> </h2>
-        <c:if test="${requestScope.logout != null}">
-            <div class="alert alert-success" role="alert"><fmt:message key="valid.login.logged.out.success"/></div>
-        </c:if>
         <c:if test="${requestScope.login_error != null}">
-            <div class="alert alert-danger" role="alert"><fmt:message key="valid.login.wrong.credential"/></div>
+            <div class="alert alert-danger" role="alert"><fmt:message key="${requestScope.login_error}"/></div>
         </c:if>
         <p>
             <input type="text" id="email" name="email" class="form-control"

@@ -21,7 +21,6 @@ public class AdminUserEditDo implements Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        // TODO: validate fields
         String id = request.getParameter("id");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");

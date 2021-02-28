@@ -49,7 +49,6 @@ public class UserActivityDaoImpl implements UserActivityDao {
         return false;
     }
 
-    // TODO: is need transaction?
     @Override
     public UserActivity save(UserActivity ua) {
         if (checkRequested(ua)) {

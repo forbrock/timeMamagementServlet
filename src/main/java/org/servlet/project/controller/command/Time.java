@@ -23,7 +23,6 @@ public class Time implements Command {
         String time = request.getParameter("time");
         String uaId = request.getParameter("uaId");
 
-        // TODO: add validation message to the front
         if (Objects.isNull(time) || Objects.isNull(uaId)) {
             request.setAttribute("timeIsEmptyMessage", "valid.index.time.empty");
             return resolve("index");

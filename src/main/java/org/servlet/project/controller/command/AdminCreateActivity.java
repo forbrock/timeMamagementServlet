@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class AdminCreateActivity implements Command {
     private final ActivityService activityService;
+    public static final String REDIRECT_TO_ADMIN_ACTIVITIES = "redirect:/admin/activities";
 
     public AdminCreateActivity(ActivityService activityService) {
         this.activityService = activityService;
@@ -19,7 +20,7 @@ public class AdminCreateActivity implements Command {
         if (Objects.isNull(name) || name.isEmpty()) {
             request.getSession().setAttribute(
                     "activity_error_message", "valid.admin.new.activity.empty");
-            return "redirect:/admin/activities";
+            return REDIRECT_TO_ADMIN_ACTIVITIES;
         }
 
         String categoryId = request.getParameter("category");
@@ -30,6 +31,6 @@ public class AdminCreateActivity implements Command {
             request.getSession().setAttribute(
                     "category_error_message", "valid.admin.new.category.exists");
         }
-        return "redirect:/admin/activities";
+        return REDIRECT_TO_ADMIN_ACTIVITIES;
     }
 }

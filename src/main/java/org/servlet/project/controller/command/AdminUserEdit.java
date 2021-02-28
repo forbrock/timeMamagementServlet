@@ -13,6 +13,7 @@ import static org.servlet.project.util.ViewResolver.resolveAdmin;
 
 public class AdminUserEdit implements Command {
     private final UserService userService;
+    public static final String ADMIN_USER_EDIT = "admin_user_edit";
 
     public AdminUserEdit(UserService userService) {
         this.userService = userService;
@@ -23,10 +24,9 @@ public class AdminUserEdit implements Command {
         String id = request.getParameter("id");
         Optional<User> user = userService.findById(Long.parseLong(id));
 
-        // TODO: add validation message to the front
         if (user.isEmpty()) {
             request.setAttribute("UserNotFound", true);
-            return resolveAdmin("admin_user_edit");
+            return resolveAdmin(ADMIN_USER_EDIT);
         }
 
         FormHelper.fillAdminUserEditForm(request, user.get().getFirstName(),
@@ -36,6 +36,6 @@ public class AdminUserEdit implements Command {
         request.setAttribute("isEnabled", user.get().isEnabled());
         request.setAttribute("id", id);
 
-        return resolveAdmin("admin_user_edit");
+        return resolveAdmin(ADMIN_USER_EDIT);
     }
 }

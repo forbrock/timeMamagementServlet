@@ -59,6 +59,6 @@ public class SecurityFilter implements Filter {
 
     private boolean isPublicAsset(HttpServletRequest request) {
         String path = request.getServletPath();
-        return path.startsWith("/public/**") || path.contains("/favicon.ico");
+        return path.startsWith("/public") || path.contains("/favicon.ico");
     }
 }

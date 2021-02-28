@@ -12,6 +12,8 @@ import static org.servlet.project.util.ViewResolver.resolveAdmin;
 
 public class AdminCategoryEdit implements Command {
     private final CategoryService categoryService;
+    public static final String ADMIN_CATEGORIES = "admin_categories";
+    public static final String ADMIN_EDIT_CATEGORY = "admin_edit_category";
 
     public AdminCategoryEdit(CategoryService categoryService) {
         this.categoryService = categoryService;
@@ -23,13 +25,13 @@ public class AdminCategoryEdit implements Command {
 
         if (Objects.isNull(id)) {
             request.setAttribute("category_not_found", true);
-            return resolveAdmin("admin_categories");
+            return resolveAdmin(ADMIN_CATEGORIES);
         }
         Optional<Category> category = categoryService.findById(Long.parseLong(id));
 
         if (category.isEmpty()) {
             request.setAttribute("category_not_found", true);
-            return resolveAdmin("admin_categories");
+            return resolveAdmin(ADMIN_CATEGORIES);
         }
         request.setAttribute("name", category.get().getName());
 
@@ -38,18 +40,18 @@ public class AdminCategoryEdit implements Command {
             if (Objects.isNull(name) || name.isEmpty()) {
                 request.setAttribute("category_empty_name", true);
                 request.setAttribute("id", id);
-                return resolveAdmin("admin_edit_category");
+                return resolveAdmin(ADMIN_EDIT_CATEGORY);
             }
             try {
                 categoryService.update(Long.parseLong(id), name);
             } catch (CategoryAlreadyExistException e) {
                 request.setAttribute("id", id);
                 request.setAttribute("category_already_exist", true);
-                return resolveAdmin("admin_edit_category");
+                return resolveAdmin(ADMIN_EDIT_CATEGORY);
             }
             return "redirect:/admin/categories";
         }
         request.setAttribute("id", id);
-        return resolveAdmin("admin_edit_category");
+        return resolveAdmin(ADMIN_EDIT_CATEGORY);
     }
 }

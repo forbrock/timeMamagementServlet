@@ -14,6 +14,7 @@ import static org.servlet.project.util.ViewResolver.resolve;
 
 public class RequestActivity implements Command {
     private static final Logger log = LogManager.getLogger(RequestActivity.class);
+    public static final String REDIRECT_TO_INDEX = "redirect:/index";
 
     private final UserActivityService userActivityService;
     private final SecurityService securityService;
@@ -39,10 +40,10 @@ public class RequestActivity implements Command {
             userActivityService.createRequest(userId, activityId);
         } catch (ActivityAlreadyExistException e) {
             session.setAttribute("request_failure_message", true);
-            return "redirect:/index";
+            return REDIRECT_TO_INDEX;
         }
         session.setAttribute("request_success_message", true);
         log.info("Activity requested successfully [user id: {}, activity id: {}]", userId, activityId);
-        return "redirect:/index";
+        return REDIRECT_TO_INDEX;
     }
 }

@@ -45,8 +45,8 @@
                    value="${requestScope.last_name}"
                    placeholder="<fmt:message key="reg.last.name">last name</fmt:message>"
                    required>
-            <c:if test="${requestScope.last_name_error != null}">
-                <div class="alert alert-danger" role="alert"><c:out value="${requestScope.last_name_error}"/></div>
+            <c:if test="${requestScope.errors.get('last_name_error') != null}">
+                <div class="alert alert-danger" role="alert"><fmt:message key="${requestScope.errors.get('last_name_error')}"/></div>
             </c:if>
         </p>
         <c:if test="${requestScope.userAlreadyExistsMessage == true}">
@@ -64,32 +64,32 @@
                    value="${requestScope.email}"
                    placeholder="<fmt:message key="reg.email">email</fmt:message>"
                    required>
-            <c:if test="${requestScope.email_error != null}">
-                <div class="alert alert-danger" role="alert"><c:out value="${requestScope.email_error}"/></div>
+            <c:if test="${requestScope.errors.get('email_error') != null}">
+                <div class="alert alert-danger" role="alert"><fmt:message key="${requestScope.errors.get('email_error')}"/></div>
             </c:if>
         </p>
         <p>
-            <input type="text"
+            <input type="password"
                    name="password"
                    class="form-control"
                    id="password"
                    value="${requestScope.password}"
                    placeholder="<fmt:message key="reg.password">password</fmt:message>"
                    required>
-            <c:if test="${requestScope.password_error != null}">
-                <div class="alert alert-danger" role="alert"><c:out value="${requestScope.password_error}"/></div>
+            <c:if test="${requestScope.errors.get('password_error') != null}">
+                <div class="alert alert-danger" role="alert"><fmt:message key="${requestScope.errors.get('password_error')}"/></div>
             </c:if>
         </p>
         <p>
-            <input type="text"
+            <input type="password"
                    name="matchingPassword"
                    class="form-control"
                    id="matchingPassword"
                    value="${requestScope.matchingPassword}"
                    placeholder="<fmt:message key="reg.matching.password">confirm password</fmt:message>"
                    required>
-            <c:if test="${requestScope.matching_password_error != null}">
-                <div class="alert alert-danger" role="alert"><c:out value="${requestScope.matching_password_error}"/></div>
+            <c:if test="${requestScope.errors.get('matching_password_error') != null}">
+                <div class="alert alert-danger" role="alert"><fmt:message key="${requestScope.errors.get('matching_password_error')}"/></div>
             </c:if>
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">

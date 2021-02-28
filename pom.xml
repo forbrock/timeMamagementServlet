@@ -10,7 +10,6 @@
   <packaging>war</packaging>
 
   <name>timeManagementServlet Webapp</name>
-  <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
@@ -82,7 +81,6 @@
     <finalName>timeManagementServlet</finalName>
     <pluginManagement>
       <plugins>
-<!--
         <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
           <artifactId>tomcat7-maven-plugin</artifactId>
@@ -92,7 +90,6 @@
             <path>/</path>
           </configuration>
         </plugin>
--->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>

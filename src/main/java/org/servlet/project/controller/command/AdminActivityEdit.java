@@ -14,6 +14,8 @@ import static org.servlet.project.util.ViewResolver.resolveAdmin;
 public class AdminActivityEdit implements Command {
     private final ActivityService activityService;
     private final CategoryService categoryService;
+    public static final String REDIRECT_TO_ADMIN_ACTIVITIES = "redirect:/admin/activities";
+    public static final String ADMIN_EDIT_ACTIVITY = "admin_edit_activity";
 
     public AdminActivityEdit(ActivityService activityService, CategoryService categoryService) {
         this.activityService = activityService;
@@ -26,14 +28,14 @@ public class AdminActivityEdit implements Command {
         if (Objects.isNull(id) || id.isEmpty()) {
             request.getSession().setAttribute(
                     "activity_error_message", "modal.new.activity.not.found");
-            return "redirect:/admin/activities";
+            return REDIRECT_TO_ADMIN_ACTIVITIES;
         }
 
         Optional<Activity> activity = activityService.findById(Long.parseLong(id));
         if (activity.isEmpty()) {
             request.getSession().setAttribute(
                     "activity_error_message", "modal.new.activity.not.found");
-            return "redirect:/admin/activities";
+            return REDIRECT_TO_ADMIN_ACTIVITIES;
         }
 
         request.setAttribute("name", activity.get().getName());
@@ -45,7 +47,7 @@ public class AdminActivityEdit implements Command {
                 request.getSession().setAttribute(
                         "activity_error_message", "modal.new.activity.not.found");
                 request.setAttribute("id", id);
-                return "redirect:/admin/activities";
+                return REDIRECT_TO_ADMIN_ACTIVITIES;
             }
             String categoryId = request.getParameter("category");
 
@@ -54,12 +56,12 @@ public class AdminActivityEdit implements Command {
             } catch (ActivityAlreadyExistException e) {
                 request.setAttribute("id", id);
                 request.setAttribute("activity_exists_message", true);
-                return resolveAdmin("admin_edit_activity");
+                return resolveAdmin(ADMIN_EDIT_ACTIVITY);
             }
-            return "redirect:/admin/activities";
+            return REDIRECT_TO_ADMIN_ACTIVITIES;
         }
 
         request.setAttribute("id", id);
-        return resolveAdmin("admin_edit_activity");
+        return resolveAdmin(ADMIN_EDIT_ACTIVITY);
     }
 }
