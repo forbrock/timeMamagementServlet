@@ -10,7 +10,10 @@ import org.servlet.project.model.entity.ActivityState;
 import org.servlet.project.model.entity.UserActivity;
 import org.servlet.project.util.DBQueries;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -107,8 +110,8 @@ public class UserActivityDaoImpl implements UserActivityDao {
     }
 
     @Override
-    public UserActivityDto save(UserActivityDto uaDto) {
-        return null;
+    public Optional<UserActivityDto> save(UserActivityDto uaDto) {
+        return Optional.empty();
     }
 
     @Override
@@ -117,12 +120,12 @@ public class UserActivityDaoImpl implements UserActivityDao {
     }
 
     @Override
-    public UserActivityDto update(UserActivityDto uaDto) {
-        return null;
+    public Optional<UserActivityDto> update(UserActivityDto uaDto) {
+        return Optional.empty();
     }
 
     @Override
-    public UserActivityDto delete(UserActivityDto uaDto) {
-        return null;
+    public Optional<UserActivityDto> delete(UserActivityDto uaDto) {
+        return Optional.empty();
     }
 }

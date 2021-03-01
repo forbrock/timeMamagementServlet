@@ -6,6 +6,8 @@ import org.servlet.project.model.service.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.servlet.project.util.ViewResolver.resolve;
+
 public class CommandResolver {
     private static final UserService userService = new UserService();
     private static final UserActivityService userActivityService = new UserActivityService();
@@ -14,9 +16,9 @@ public class CommandResolver {
     private static final ActivityService activityService = new ActivityService();
     private static final CategoryService categoryService = new CategoryService();
 
-    public static final Index indexCommand = new Index(userService, userActivityService, securityService, activityService);
+    private static final Index indexCommand = new Index(userService, userActivityService, securityService, activityService);
 
-    public static final Map<String, Command> commands = new HashMap<>() {{
+    private static final Map<String, Command> commands = new HashMap<>() {{
         put("logout", new Logout());
         put("login", new Login(userService, securityService));
         put("registration", new Registration(userService));
@@ -43,4 +45,8 @@ public class CommandResolver {
         put("admin/activity/edit", new AdminActivityEdit(activityService, categoryService));
         put("admin/activity/create", new AdminCreateActivity(activityService));
     }};
+
+    public static Command getCommand(String path) {
+        return commands.getOrDefault(path, (def) -> resolve("login"));
+    }
 }

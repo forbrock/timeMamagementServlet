@@ -19,14 +19,14 @@ public class CategoryService {
         return categoryDao.findById(id);
     }
 
-    public Category update(long id, String name) {
+    public Optional<Category> update(long id, String name) {
         return categoryDao.update(Category.builder()
                 .id(id)
                 .name(name)
                 .build());
     }
 
-    public Category create(String name) {
+    public Optional<Category> create(String name) {
         return categoryDao.save(Category.builder()
                 .name(name)
                 .build());

@@ -4,6 +4,7 @@
 
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="property/messages"/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <html>
 <head>
@@ -14,10 +15,10 @@
 <body>
 <div class="container" style="margin-top: 50px;">
     <div class="error-body">
-        <h3><mft:message key="error.page.common.message">something went wrong!</mft:message></h3>
+        <h3><fmt:message key="error.page.forbidden.message">something went wrong!</fmt:message></h3>
         <h1>403</h1>
         <p style="font-size: 22px;"><fmt:message key="valid.access.restricted">forbidden</fmt:message></p>
-        <a href="${pageContext}/"><fmt:message key="error.page.back.home">back to Home Page</fmt:message></a>
+        <a href="${contextPath}/"><fmt:message key="error.page.back.home">back to Home Page</fmt:message></a>
     </div>
 </div>
 </body>

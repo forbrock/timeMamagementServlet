@@ -1,6 +1,5 @@
 package org.servlet.project;
 
-import org.servlet.project.controller.command.Command;
 import org.servlet.project.util.CommandResolver;
 
 import javax.servlet.ServletConfig;
@@ -9,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import static org.servlet.project.util.ViewResolver.resolve;
 
 public class MainServlet extends HttpServlet {
     public void init(ServletConfig servletConfig) {
@@ -24,8 +21,7 @@ public class MainServlet extends HttpServlet {
         if (path.isEmpty()) {
             path = "index";
         }
-        Command command = CommandResolver.commands.getOrDefault(path, (def) -> resolve("login"));
-        String page = command.execute(request);
+        String page = CommandResolver.getCommand(path).execute(request);
 
         if (page.contains("redirect:")) {
             String redirectStr = contextPath + page.replace("redirect:", "");

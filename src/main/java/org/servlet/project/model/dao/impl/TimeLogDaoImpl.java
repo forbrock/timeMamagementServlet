@@ -48,17 +48,17 @@ public class TimeLogDaoImpl implements TimeLogDao {
     }
 
     @Override
-    public TimeLogDto save(TimeLogDto timeLogDto) {
-        return null;
+    public Optional<TimeLogDto> save(TimeLogDto timeLogDto) {
+        return Optional.empty();
     }
 
     @Override
-    public TimeLogDto update(TimeLogDto timeLogDto) {
-        return null;
+    public Optional<TimeLogDto> update(TimeLogDto timeLogDto) {
+        return Optional.empty();
     }
 
     @Override
-    public TimeLogDto delete(TimeLogDto timeLogDto) {
-        return null;
+    public Optional<TimeLogDto> delete(TimeLogDto timeLogDto) {
+        return Optional.empty();
     }
 }

@@ -69,7 +69,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User save(User user) {
+    public Optional<User> save(User user) {
         try (PreparedStatement statement =
                 connection.prepareStatement(DBQueries.SAVE_USER_QUERY)) {
             statement.setString(1, user.getFirstName());
@@ -83,15 +83,15 @@ public class UserDaoImpl implements UserDao {
             throw new UserAlreadyExistException("Such user already exists: " + user.getEmail());
         } catch (SQLException e) {
             log.error("ERROR: can't provide user save operation!", e);
-            return new User();
+            return Optional.empty();
         }
-        return user;
+        return Optional.of(user);
     }
 
     @Override
-    public User update(User user) {
+    public Optional<User> update(User user) {
         if (Objects.isNull(user.getPassword()) || user.getPassword().isEmpty()) {
-            return updateNoPass(user);
+            return Optional.ofNullable(updateNoPass(user));
         }
 
         try (PreparedStatement statement =
@@ -105,9 +105,9 @@ public class UserDaoImpl implements UserDao {
             statement.executeUpdate();
         } catch (SQLException e) {
             log.error("ERROR: can't provide user update operation!", e);
-            return new User();
+            return Optional.empty();
         }
-        return user;
+        return Optional.of(user);
     }
 
     private User updateNoPass(User user) {
@@ -143,7 +143,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User delete(User user) {
-        return null;
+    public Optional<User> delete(User user) {
+        return Optional.empty();
     }
 }

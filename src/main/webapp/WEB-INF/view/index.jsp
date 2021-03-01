@@ -28,10 +28,6 @@
            role="tab" aria-controls="nav-home" aria-selected="true">
             <fmt:message key="index.tab.current">current</fmt:message>
         </a>
-        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-           role="tab" aria-controls="nav-profile" aria-selected="false">
-            <fmt:message key="index.tab.new">new</fmt:message>
-        </a>
         <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
            role="tab" aria-controls="nav-contact" aria-selected="false">
             <fmt:message key="index.tab.completed">completed</fmt:message>
@@ -83,28 +79,6 @@
             <div><jsp:include page="fragments/modal_new_user_activity.jsp"/></div>
         </div>
 
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-            <table class="table table-striped table-sm mt-3">
-                <thead>
-                <tr>
-                    <th><fmt:message key="index.tab.new.table.head.category">category</fmt:message></th>
-                    <th><fmt:message key="index.tab.new.table.head.activity">activity</fmt:message></th>
-                    <th><fmt:message key="index.tab.new.table.head.state">state</fmt:message></th>
-                </tr>
-                </thead>
-                <tbody>
-<%--
-                        <div>
-                            <tr>
-                                <td>category</td>
-                                <td>name</td>
-                                <td>accepted</td>
-                                <td>actions</td>
-                            </tr>
-                        </div>
---%>
-                </tbody>
-            </table></div>
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
             <table class="table table-striped table-sm mt-3">
                 <thead>

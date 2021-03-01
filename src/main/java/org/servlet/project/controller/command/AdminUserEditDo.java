@@ -1,16 +1,9 @@
 package org.servlet.project.controller.command;
 
-import org.servlet.project.exceptions.UserAlreadyExistException;
-import org.servlet.project.model.entity.Role;
-import org.servlet.project.model.entity.User;
 import org.servlet.project.model.service.UserService;
 import org.servlet.project.util.FormHelper;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Optional;
-
-import static org.servlet.project.util.ViewResolver.resolveAdmin;
 
 public class AdminUserEditDo implements Command {
     private final UserService userService;
@@ -31,7 +24,6 @@ public class AdminUserEditDo implements Command {
 
         userService.update(id, firstName, lastName, password, role, isEnabled);
         FormHelper.fillAdminUserEditForm(request, firstName, lastName, role);
-//            request.setAttribute("roles", Role.values());
         return "redirect:/admin/users";
     }
 }

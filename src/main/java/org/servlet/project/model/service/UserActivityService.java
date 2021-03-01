@@ -4,7 +4,6 @@ import org.servlet.project.model.dao.UserActivityDao;
 import org.servlet.project.model.dao.impl.DaoFactory;
 import org.servlet.project.model.dto.UserActivityDto;
 import org.servlet.project.model.entity.ActivityState;
-import org.servlet.project.model.entity.User;
 import org.servlet.project.model.entity.UserActivity;
 
 import java.util.List;

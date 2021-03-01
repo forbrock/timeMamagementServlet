@@ -7,7 +7,6 @@ import org.servlet.project.model.entity.Role;
 import org.servlet.project.model.entity.User;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UserService {
@@ -26,7 +25,7 @@ public class UserService {
         return userDao.findById(id);
     }
 
-    public User create(String firstName,
+    public Optional<User> create(String firstName,
                        String lastName,
                        String email,
                        String password,
@@ -41,7 +40,7 @@ public class UserService {
                 .build());
     }
 
-    public User update(String id, String firstName, String lastName,
+    public Optional<User> update(String id, String firstName, String lastName,
                        String password, String role, String enabled) {
         User user = User.builder()
                 .id(Long.parseLong(id))

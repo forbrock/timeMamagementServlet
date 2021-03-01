@@ -18,14 +18,14 @@ public class ActivityService {
         return activityDao.findById(id);
     }
 
-    public Activity update(long id, String name) {
+    public Optional<Activity> update(long id, String name) {
         return activityDao.update(Activity.builder()
                 .id(id)
                 .name(name)
                 .build());
     }
 
-    public Activity create(String name, long categoryId) {
+    public Optional<Activity> create(String name, long categoryId) {
         return activityDao.save(Activity.builder()
                 .name(name)
                 .categoryId(categoryId)

@@ -36,21 +36,21 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public Category update(Category category) {
+    public Optional<Category> update(Category category) {
         try (PreparedStatement statement =
                 connection.prepareStatement(DBQueries.UPDATE_CATEGORY_QUERY)) {
             statement.setString(1, category.getName());
             statement.setLong(2, category.getId());
             boolean isUpdated = statement.executeUpdate() > 0;
             if (isUpdated) {
-                return category;
+                return Optional.of(category);
             }
         } catch (SQLIntegrityConstraintViolationException ex1) {
             throw new CategoryAlreadyExistException();
         } catch (SQLException ex2) {
             log.error("Can not provide category update operation", ex2);
         }
-        return new Category();
+        return Optional.empty();
     }
 
     @Override
@@ -69,13 +69,13 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public Category save(Category category) {
+    public Optional<Category> save(Category category) {
         try (PreparedStatement statement =
                 connection.prepareStatement(DBQueries.SAVE_CATEGORY_QUERY)) {
             statement.setString(1, category.getName());
             boolean saved = statement.executeUpdate() > 0;
             if (saved) {
-                return category;
+                return Optional.of(category);
             }
         } catch (SQLIntegrityConstraintViolationException ex1) {
             log.info("Attempt to create an existing category: {}", category.getName());
@@ -83,7 +83,7 @@ public class CategoryDaoImpl implements CategoryDao {
         } catch (SQLException ex2) {
             log.error("Can not provide category save operation", ex2);
         }
-        return new Category();
+        return Optional.empty();
     }
 
     @Override
@@ -99,7 +99,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public Category delete(Category category) {
-        return null;
+    public Optional<Category> delete(Category category) {
+        return Optional.empty();
     }
 }
