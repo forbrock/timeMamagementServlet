@@ -37,6 +37,6 @@ User:
 ### Running
 * cd to root project folder and execute command *mvnw clean tomcat7:run*
 * After server start, application will be available by URL [http://localhost:8080/](http://localhost:8080/) 
-* Use login "**admin@gmail.com**" and password "**111**" to log in with administrator rights.
+* Use login "**admin@mail.com**" and password "**111**" to log in with administrator rights.
 * Use login "**user1@mail.com**" and password "**111**" to log in as user.
 * Use login "**user2@mail.com**" and password "**111**" to log in as user.

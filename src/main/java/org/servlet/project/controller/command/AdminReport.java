@@ -6,7 +6,6 @@ import org.servlet.project.model.service.UserActivityService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 import static org.servlet.project.util.ViewResolver.resolveAdmin;
 
