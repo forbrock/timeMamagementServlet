@@ -28,28 +28,33 @@
                     <thead>
                         <tr>
                             <th>
-                                <a class="nav-link" href="${contextPath}/admin/report?sortBy=user&order=${sortOrder}">
-                                    <fmt:message key="admin.report.table.head.user">user</fmt:message>
+                                <a style="color: black" class="nav-link" href="${contextPath}/admin/report?sortBy=user&order=${sortOrder}">
+                                    <fmt:message key="admin.report.table.head.user">user </fmt:message>
+                                    <img src="${contextPath}/public/img/sort.png" height="12pt">
                                 </a>
                             </th>
                             <th>
-                                <a class="nav-link" href="${contextPath}/admin/report?sortBy=category&order=${sortOrder}">
-                                    <fmt:message key="admin.report.table.head.category">category</fmt:message>
+                                <a style="color: black" class="nav-link" href="${contextPath}/admin/report?sortBy=category&order=${sortOrder}">
+                                    <fmt:message key="admin.report.table.head.category">category </fmt:message>
+                                    <img src="${contextPath}/public/img/sort.png" height="12pt">
                                 </a>
                             </th>
                             <th>
-                                <a class="nav-link" href="${contextPath}/admin/report?sortBy=activity&order=${sortOrder}">
-                                    <fmt:message key="admin.report.table.head.activity">activity</fmt:message>
+                                <a style="color: black" class="nav-link" href="${contextPath}/admin/report?sortBy=activity&order=${sortOrder}">
+                                    <fmt:message key="admin.report.table.head.activity">activity </fmt:message>
+                                    <img src="${contextPath}/public/img/sort.png" height="12pt">
                                 </a>
                             </th>
                             <th>
-                                <a class="nav-link" href="${contextPath}/admin/report?sortBy=state&order=${sortOrder}">
-                                    <fmt:message key="admin.report.table.head.state">state</fmt:message>
+                                <a style="color: black" class="nav-link" href="${contextPath}/admin/report?sortBy=state&order=${sortOrder}">
+                                    <fmt:message key="admin.report.table.head.state">state </fmt:message>
+                                    <img src="${contextPath}/public/img/sort.png" height="12pt">
                                 </a>
                             </th>
                             <th>
-                                <a class="nav-link" href="${contextPath}/admin/report?sortBy=time&order=${sortOrder}">
-                                    <fmt:message key="admin.report.table.head.total.time">total time</fmt:message>
+                                <a style="color: black" class="nav-link" href="${contextPath}/admin/report?sortBy=time&order=${sortOrder}">
+                                    <fmt:message key="admin.report.table.head.total.time">total time </fmt:message>
+                                    <img src="${contextPath}/public/img/sort.png" height="12pt">
                                 </a>
                             </th>
                         </tr>

@@ -31,10 +31,9 @@ public class AdminReport implements Command {
         String order = request.getParameter("order");
         String sortOrder = "";
         if (order != null) {
-            sortOrder = order.equals("asc") ? "desc" : "asc";
+            sortOrder = order.equals("desc") ? "asc" : "desc";
             request.setAttribute("sortOrder", sortOrder);
         }
-
         Comparator<UserActivityDto> comparator = Comparator.comparing(UserActivityDto::getEmail);
         if (sortBy != null) {
             switch (sortBy) {
