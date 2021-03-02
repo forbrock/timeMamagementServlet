@@ -6,6 +6,7 @@
 <fmt:setBundle basename="property/messages"/>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:set var="sortOrder" value="${requestScope.sortOrder}"/>
 
 <html lang="en">
 	<head>
@@ -26,11 +27,31 @@
 				<table class="table table-striped table-sm mt-3">
                     <thead>
                         <tr>
-                            <th><fmt:message key="admin.report.table.head.user">user</fmt:message></th>
-                            <th><fmt:message key="admin.report.table.head.category">category</fmt:message></th>
-                            <th><fmt:message key="admin.report.table.head.activity">activity</fmt:message></th>
-                            <th><fmt:message key="admin.report.table.head.state">state</fmt:message></th>
-                            <th><fmt:message key="admin.report.table.head.total.time">total time</fmt:message></th>
+                            <th>
+                                <a class="nav-link" href="${contextPath}/admin/report?sortBy=user&order=${sortOrder}">
+                                    <fmt:message key="admin.report.table.head.user">user</fmt:message>
+                                </a>
+                            </th>
+                            <th>
+                                <a class="nav-link" href="${contextPath}/admin/report?sortBy=category&order=${sortOrder}">
+                                    <fmt:message key="admin.report.table.head.category">category</fmt:message>
+                                </a>
+                            </th>
+                            <th>
+                                <a class="nav-link" href="${contextPath}/admin/report?sortBy=activity&order=${sortOrder}">
+                                    <fmt:message key="admin.report.table.head.activity">activity</fmt:message>
+                                </a>
+                            </th>
+                            <th>
+                                <a class="nav-link" href="${contextPath}/admin/report?sortBy=state&order=${sortOrder}">
+                                    <fmt:message key="admin.report.table.head.state">state</fmt:message>
+                                </a>
+                            </th>
+                            <th>
+                                <a class="nav-link" href="${contextPath}/admin/report?sortBy=time&order=${sortOrder}">
+                                    <fmt:message key="admin.report.table.head.total.time">total time</fmt:message>
+                                </a>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
