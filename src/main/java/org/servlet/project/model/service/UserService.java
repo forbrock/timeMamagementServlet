@@ -10,8 +10,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserService {
-    private final UserDao userDao = DaoFactory.createUserDao();
-    private final SecurityService securityService = new SecurityService();
+    private UserDao userDao = DaoFactory.createUserDao();
+    private SecurityService securityService = new SecurityService();
+
+    public UserService() {
+    }
+
+    public UserService(UserDao userDao, SecurityService securityService) {
+        this.userDao = userDao;
+        this.securityService = securityService;
+    }
 
     public Optional<User> findByEmail(String email) {
         return userDao.findByEmail(email);
