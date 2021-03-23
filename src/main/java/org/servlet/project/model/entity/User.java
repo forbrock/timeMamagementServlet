@@ -88,6 +88,19 @@ public class User {
         return new UserBuilder();
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", role=" + role +
+                '}';
+    }
+
     public static class UserBuilder {
         private long id;
         private String firstName;

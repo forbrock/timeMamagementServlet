@@ -2,7 +2,6 @@ package org.servlet.project.model.service;
 
 import org.servlet.project.exceptions.UserAlreadyExistException;
 import org.servlet.project.model.dao.UserDao;
-import org.servlet.project.model.dao.impl.DaoFactory;
 import org.servlet.project.model.entity.Role;
 import org.servlet.project.model.entity.User;
 
@@ -10,11 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserService {
-    private UserDao userDao = DaoFactory.createUserDao();
-    private SecurityService securityService = new SecurityService();
-
-    public UserService() {
-    }
+    private final UserDao userDao;
+    private final SecurityService securityService;
 
     public UserService(UserDao userDao, SecurityService securityService) {
         this.userDao = userDao;

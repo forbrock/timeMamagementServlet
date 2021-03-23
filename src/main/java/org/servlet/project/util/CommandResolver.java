@@ -1,6 +1,7 @@
 package org.servlet.project.util;
 
 import org.servlet.project.controller.command.*;
+import org.servlet.project.model.dao.impl.DaoFactory;
 import org.servlet.project.model.service.*;
 
 import java.util.HashMap;
@@ -9,9 +10,10 @@ import java.util.Map;
 import static org.servlet.project.util.ViewResolver.resolve;
 
 public class CommandResolver {
-    private static final UserService userService = new UserService();
     private static final UserActivityService userActivityService = new UserActivityService();
     private static final SecurityService securityService = new SecurityService();
+    private static final UserService userService =
+            new UserService(DaoFactory.createUserDao(), securityService);
     private static final TimeLogService timeLogService = new TimeLogService();
     private static final ActivityService activityService = new ActivityService();
     private static final CategoryService categoryService = new CategoryService();
